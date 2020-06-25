@@ -124,6 +124,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "tp-web-final"
+    }
+  },
+  "defaultProject": "tp-web-final",
+  "cli": {
+    "analytics": false
+  }
 }
