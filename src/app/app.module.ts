@@ -1,28 +1,38 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+/*Imports Externos*/
+import { FormsModule } from '@angular/forms'; //directiva ng
+import { HttpClientModule } from '@angular/common/http'; //cliente http
+import { NgxDataTableModule} from "angular-9-datatable"; //angular datatable
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/layout/header/header.component';
+import { FooterComponent } from './components/layout/footer/footer.component';
+import { GestionUsuarioComponent } from './components/gestion/gestion-usuario/gestion-usuario.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/gestion/login/login.component';
+import { LoginService } from './service/login.service';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    GestionUsuarioComponent,
+    HomeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    NgxDataTableModule,
   ],
-  providers: [],
+  providers: [LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,117 @@
+<div *ngIf="_servLogin.usuarioLogeado.perfil == 'administrador'">
+    <!--  -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+
+
+                <!--------------- FORMULARIO DE REGISTRO DE USUARIO --------------->
+
+
+                <h1 class="text-center">Crear usuario</h1>
+                <form #formCrearUsuario="ngForm">
+                    <div class="form-group row">
+                        <label for="usuario">Nombre de usuario</label>
+                        <input type="text" name="usuario" id="usuario" class="form-control"
+                            [(ngModel)]="usuario.usuario" required #usuarioV="ngModel"
+                            (change)="validarNombreUsuario()">
+                        <!-- Validacion -->
+                        <div *ngIf="usuarioV.invalid && (usuarioV.dirty || usuarioV.touched)">
+                            <div *ngIf="usuarioV.errors.required">
+                                <small class="text-danger"><Strong>*Usuario Obligatorio</Strong></small>
+                            </div>
+                        </div>
+                        <div *ngIf="buscarUsuario">
+                            <small class="text-danger"><Strong>*Nombre de usuario no disponible</Strong></small>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="password">Contraseña</label>
+                        <input type="password" name="password" id="password" class="form-control"
+                            [(ngModel)]="usuario.password" required #passwordV="ngModel">
+                        <!-- Validacion -->
+                        <div *ngIf="passwordV.invalid && (passwordV.dirty || passwordV.touched)">
+                            <div *ngIf="passwordV.errors.required">
+                                <small class="text-danger"><Strong>*Contraseña Obligatoria</Strong></small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="perfil">Tipo de usuario</label>
+                        <select name="perfil" id="perfil" class="form-control" [(ngModel)]="usuario.perfil" required
+                            #perfilV="ngModel">
+                            <option value="administrativo">Administrativo</option>
+                            <option value="administrador">Administrador</option>
+                            <option value="gerente">Gerente</option>
+                        </select>
+                        <!-- Validacion -->
+                        <div *ngIf="perfilV.invalid && (perfilV.dirty || perfilV.touched)">
+                            <div *ngIf="perfilV.errors.required">
+                                <small class="text-danger"><Strong>*Perfil Obligatorio</Strong></small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button *ngIf="!showModificarUsuario" class="btn btn-success w-50" (click)="crearUsuario()"[disabled]="(!formCrearUsuario.form.valid || buscarUsuario)">Crear</button>
+
+                        <button *ngIf="showModificarUsuario" class="btn btn-danger mx-5"(click)="cancelarModificar()">Cancelar</button>
+                        
+                        <button *ngIf="showModificarUsuario" class="btn btn-success mx-5" (click)="modificarUsuario()"[disabled]="(!formCrearUsuario.form.valid || buscarUsuario)">Modificar</button>
+
+                    </div>
+                </form>
+            </div>
+
+
+            <!----------------- TABLA DE USUARIOS ----------------->
+
+
+            <div class="col-12">
+                <table class="table table-striped text-center" [mfData]="listaUsuarios" #mf="mfDataTable"
+                    [mfRowsOnPage]="5">
+                    <thead>
+                        <tr>
+                            <th>
+                                <mfDefaultSorter by="usuario">Usuario</mfDefaultSorter>
+                            </th>
+                            <th>
+                                <mfDefaultSorter by="password">Password</mfDefaultSorter>
+                            </th>
+                            <th>
+                                <mfDefaultSorter by="activo">Activo</mfDefaultSorter>
+                            </th>
+                            <th>
+                                <mfDefaultSorter by="perfil">Perfil</mfDefaultSorter>
+                            </th>
+                            <th colspan="2">
+                                Acciones
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let usuario of mf.data">
+                            <td>{{usuario.usuario}}</td>
+                            <td>{{usuario.password}}</td>
+                            <td>{{usuario.activo && 'Si' || 'No'}}</td>
+                            <td>{{usuario.perfil}}</td>
+                            <td><button class="btn btn-primary" (click)="mostrarModificar(usuario)">Modificar</button>
+                            </td>
+                            <td><button class="btn btn-danger" (click)="eliminarUsuario(usuario)">Eliminar</button></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4">
+                                <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="_servLogin.usuarioLogeado.perfil != 'administrador'"><img src="https://i.pinimg.com/originals/38/27/73/3827734f8ae133012dbceeacba7ca95b.jpg" height="100%" width="100%"></div>

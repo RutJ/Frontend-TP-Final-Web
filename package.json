@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "~9.1.9",
     "@angular/router": "~9.1.9",
     "@fortawesome/fontawesome-free": "^5.13.1",
+    "angular-9-datatable": "^0.1.1",
     "bootstrap": "^4.5.0",
     "jquery": "^3.5.1",
     "ngx-toastr": "^12.1.0",
