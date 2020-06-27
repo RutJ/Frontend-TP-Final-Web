@@ -14,6 +14,7 @@ import { GestionUsuarioComponent } from './components/gestion/gestion-usuario/ge
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/gestion/login/login.component';
 import { LoginService } from './service/login.service';
+import { GestionAfiliadoComponent } from './components/gestion/gestion-afiliado/gestion-afiliado.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { LoginService } from './service/login.service';
     FooterComponent,
     GestionUsuarioComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    GestionAfiliadoComponent
   ],
   imports: [
     BrowserModule,

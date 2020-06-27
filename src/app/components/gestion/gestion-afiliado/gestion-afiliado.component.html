@@ -1,0 +1,138 @@
+<div *ngIf="_servLogin.usuarioLogeado.perfil == 'administrador'">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+            <!-----------------REGISTRO DE AFILIADOS-------------------->
+
+                <h3 class="display-3 text-center">Crear Afiliado</h3>
+                <form #formCrearAfiliado="ngForm">
+                    <div class="form-group row">
+                        <label for="apellido"> Apellido del afiliado</label>
+                        <input type="text" name="apellido" id="apellido" class="form-control"
+                        [(ngModel)]="afiliado.apellido" required #apellidoV="ngModel">
+                        <!--Validacion-->
+                        <div *ngIf="apellidoV.invalid && (apellidoV.dirty || apellidoV.touched)">
+                            <div *ngIf="apellidoV.errors.required">
+                                <small class="text-danger"><Strong>*Campo Obligatorio</Strong></small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="nombres">Nombres del afiliado</label>
+                        <input type="text" name="nombres" id="nombres" class="form-control"
+                        [(ngModel)]="afiliado.nombres" required #nombresV="ngModel">
+                        <!--Validacion-->
+                        <div *ngIf="nombresV.invalid && (nombresV.dirty || nombresV.touched)">
+                            <div *ngIf="nombresV.errors.required">
+                                <small class="text-danger"><Strong>*Campo Obligatorio</Strong></small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="dni">DNI del afiliado</label>
+                        <input type="number" name="dni" id="dni" class="form-control"
+                        [(ngModel)]="afiliado.dni" required #dniV>
+                        <!--Validacion-->
+                        <div *ngIf="dniV.invalid && (dniV.dirty || dniV.touched)">
+                            <div *ngIf="dniV.errors.required">
+                                <small class="text-danger"><Strong>*Campo Obligatorio</Strong></small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="email">Email del afiliado</label>
+                        <input type="email" name="email" id="email" class="form-control"
+                        [(ngModel)]="afiliado.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$" #emailV="ngModel">
+                        <!--Validacion-->
+                        <div *ngIf="emailV.invalid && (emailV.dirty || emailV.touched)">
+                            <div *ngIf="emailV.errors.required">
+                                <small class="text-danger"><Strong>*Campo Obligatorio</Strong></small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="imagen">Foto del afiliado</label>
+                        <input type="text" name="imagen" id="imagen" class="form-control"
+                        [(ngModel)]="afiliado.imagen" required #imagenV="ngModel">
+                        <!--Validacion-->
+                        <div *ngIf="imagenV.invalid && (imagenV.dirty || imagenV.touched)">
+                            <div *ngIf="imagenV.errors.required">
+                                <small class="text-danger"><Strong>*Campo Obligatorio</Strong></small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="telefono">Email del afiliado</label>
+                        <input type="number" name="telefono" id="telefono" class="form-control"
+                        [(ngModel)]="afiliado.telefono" required #telefonoV="ngModel">
+                        <!--Validacion-->
+                        <div *ngIf="telefonoV.invalid && (telefonoV.dirty || telefonoV.touched)">
+                            <div *ngIf="telefonoV.errors.required">
+                                <small class="text-danger"><Strong>*Campo Obligatorio</Strong></small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button *ngIf="!showModAfiliado" class="btn btn-success w-50" (click)="crearAfiliado()" [disabled]="formCrearAfiliado.form.invalid">Crear</button>
+
+                        <button *ngIf="showModAfiliado" class="btn btn-danger mx-5" (click)="cancelarModificar()">Cancelar</button>
+                        
+                        <button *ngIf="showModAfiliado" class="btn btn-success mx-5" (click)="modificarAfiliado()"[disabled]="formCrearAfiliado.form.invalid">Modificar</button>
+                    </div>
+                </form>
+            </div>
+            
+            <!------------------------------- TABLA DE AFILIADOS ----------------------------------------------->
+
+            <div class="col-12">
+                <table class="table table-striped text-center" [mfData]="listaAfiliados" #mf="mfDataTable"
+                [mfRowsOnPage]="5">
+                    <thead>
+                        <tr>
+                            <th>
+                                <mfDefaultSorter by="apellido">Apellido</mfDefaultSorter>
+                            </th>
+                            <th>
+                                <mfDefaultSorter by="nombres">Nombres</mfDefaultSorter>
+                            </th>
+                            <th>
+                                <mfDefaultSorter by="dni">DNI</mfDefaultSorter>
+                            </th>
+                            <th>
+                                <mfDefaultSorter by="email">Email</mfDefaultSorter>
+                            </th>
+                            <th colspan="2">
+                                Acciones
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let afiliado of mf.data">
+                            <td>{{afiliado.apellido}}</td>
+                            <td>{{afiliado.nombres}}</td>
+                            <td>{{afiliado.dni}}</td>
+                            <td>{{afiliado.email}}</td>
+                            <td><button class="btn btn-primary" (click)="mostrarModificar(afiliado)">Modificar</button></td>
+                            <td><button class="btn btn-danger" (click)="eliminarAfiliado(afiliado._id)">Eliminar</button></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4">
+                                <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="_servLogin.usuarioLogeado.perfil != 'administrador'"><img src="https://media.tenor.com/images/b65504dbb7eeafc34f3ae35c455cf10f/tenor.gif" height="100%" width="100%"></div>
