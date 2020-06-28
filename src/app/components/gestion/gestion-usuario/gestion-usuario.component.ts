@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from 'src/app/service/usuario.service';
 import { Usuario } from 'src/app/models/usuario';
-import { element } from 'protractor';
 import { LoginService } from 'src/app/service/login.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-gestion-usuario',
@@ -17,7 +17,8 @@ export class GestionUsuarioComponent implements OnInit {
   showModificarUsuario:boolean = false;
   constructor(
     private _servUsuario:UsuarioService,
-    public _servLogin:LoginService
+    public _servLogin:LoginService,
+    private _toastr:ToastrService
     ) {
 
     this.listaUsuarios = new Array<Usuario>();
@@ -30,10 +31,12 @@ export class GestionUsuarioComponent implements OnInit {
     this.usuario.activo = true;
     this._servUsuario.crearUsuario(this.usuario).subscribe(
       (result) => {
-        console.log(result);
+        //console.log(result);
+        this._toastr.success("Usuario Creado","Exito")
       },
       (error) => {
-        console.log(error);
+        //console.log(error);
+        this._toastr.error("Ha ocurrido un error al crear usuario","Error");
       }
     )
     this.getUsuarios();
@@ -44,10 +47,12 @@ export class GestionUsuarioComponent implements OnInit {
     usuarioEliminar.activo = false;
     this._servUsuario.modificarUsuario(usuarioEliminar).subscribe(
       (result) => {
-        console.log(result);
+        //console.log(result);
+        this._toastr.error("Usuario Eliminado","Eliminado");
       },
       (error) => {
-        console.log(error);
+        //console.log(error);
+        this._toastr.error("Ha ocurrido un error al eliminar usuario","Error");
       }
     )
     this.getUsuarios();
@@ -57,10 +62,12 @@ export class GestionUsuarioComponent implements OnInit {
   public modificarUsuario(){
     this._servUsuario.modificarUsuario(this.usuario).subscribe(
       (result) => {
-        console.log(result);
+        //console.log(result);
+        this._toastr.info("Usuario Modificado","Modificado")
       },
       (error) => {
-        console.log(error);
+        //console.log(error);
+        this._toastr.error("Ha ocurrido un error al modificar usuario","Error");
       }
     )
     this.cancelarModificar();

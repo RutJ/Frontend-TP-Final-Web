@@ -1,0 +1,123 @@
+<div
+    >
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+
+
+                <!--------------- FORMULARIO DE REGISTRO DE SERVICIOS --------------->
+
+
+                <h1 class="text-center">Crear Servicio</h1>
+                <form #formCrearServicio="ngForm">
+                    <div class="form-group row">
+                        <label for="nombre">Nombre de Servicio</label>
+                        <input type="text" name="nombre" id="nombre" class="form-control" [(ngModel)]="servicio.nombre"
+                            required #nombreV="ngModel">
+                        <!-- Validacion -->
+                        <div *ngIf="nombreV.invalid && (nombreV.dirty || nombreV.touched)">
+                            <div *ngIf="nombreV.errors.required">
+                                <small class="text-danger"><Strong>*Nombre Obligatorio</Strong></small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="descripcion">Descripcion</label>
+                        <textarea name="descripcion" id="descripcion" class="form-control"
+                            [(ngModel)]="servicio.descripcion" required #descripcionV="ngModel"></textarea>
+                        <!-- Validacion -->
+                        <div *ngIf="descripcionV.invalid && (descripcionV.dirty || descripcionV.touched)">
+                            <div *ngIf="descripcionV.errors.required">
+                                <small class="text-danger"><Strong>*Descripcion Obligatorio</Strong></small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="imagen">Imagen</label>
+                        <input type="file" name="imagen" id="imagen" class="form-control" alife-file-to-base64
+                            (onFileChanged)="onFilesChanges($event)">
+                        <!-- Validacion -->
+                        <div *ngIf="validarImagen">
+                            <small class="text-success"><Strong>*Imagen correcta</Strong></small>
+                        </div>
+                        <div *ngIf="!validarImagen">
+                            <small class="text-danger"><Strong>*Eliga otra imagen</Strong></small>
+                        </div>
+                    </div>
+                    <div *ngIf="showModificarServicio" class="form-group row">
+                        <label for="imagenActual" class="col-md-12">Imagen actual</label>
+                        <img src="{{servicio.imagen}}" height="100px" class="col-md-4 offset-md-4">
+
+                    </div>
+
+                    <div class="text-center">
+                        <button *ngIf="!showModificarServicio" class="btn btn-success w-50"
+                            [disabled]="(!formCrearServicio.form.valid) || !validarImagen"
+                            (click)="crearServicio()">Crear</button>
+
+                        <button *ngIf="showModificarServicio" class="btn btn-danger mx-5"
+                            (click)="cancelarModificar()">Cancelar</button>
+
+                        <button *ngIf="showModificarServicio" class="btn btn-success mx-5"
+                            [disabled]="(!formCrearServicio.form.valid) || !validarImagen"
+                            (click)="modificarServicio()">Modificar</button>
+
+                    </div>
+                </form>
+            </div>
+            <!----------------- TABLA DE SERVICIOS ----------------->
+
+
+            <div class="col-md-8 offset-md-2">
+                <div *ngFor="let servicio of listaServicios">
+                    <div class="card my-5">
+                        <p class="text-center">Imagen</p>
+                        <img src="{{servicio.imagen}}" class="card-img-top col-md-4 offset-md-4">
+                        <div class="card-body">
+                            <h5 class="card-text">Nombre: {{servicio.nombre}}</h5>
+                            <h5 class="card-text">Descripcion: {{servicio.descripcion}}</h5>
+                            <h5 class="card-text">¿Activo?: {{servicio.activo && 'Si' || 'No'}}</h5>
+                            <h5 class="text-center">Lista de afiliados inscriptos</h5>
+                            <table class="table table-striped text-center" [mfData]="servicio.afiliadosInsc" #mf="mfDataTable"
+                                [mfRowsOnPage]="5">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <mfDefaultSorter by="nombres">Nombre</mfDefaultSorter>
+                                        </th>
+                                        <th>
+                                            <mfDefaultSorter by="apellido">Apellido</mfDefaultSorter>
+                                        </th>
+                                        <th>
+                                            <mfDefaultSorter by="dni">DNI</mfDefaultSorter>
+                                        </th>
+                                        <th>
+                                            <mfDefaultSorter by="email">E-Mail</mfDefaultSorter>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let afiliado of mf.data">
+                                        <td>{{afiliado.nombres}}</td>
+                                        <td>{{afiliado.apellido}}</td>
+                                        <td>{{afiliado.dni}}</td>
+                                        <td>{{afiliado.email}}</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4">
+                                            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <button class="btn btn-primary"(click)="mostrarModificar(servicio)">Modificar</button>
+                            <button class="btn btn-danger"(click)="desactivarServicio(servicio)">Desactivar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -5,6 +5,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'; //directiva ng
 import { HttpClientModule } from '@angular/common/http'; //cliente http
 import { NgxDataTableModule} from "angular-9-datatable"; //angular datatable
+import { AlifeFileToBase64Module } from 'alife-file-to-base64'; //convertir img a base64
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // animacion para los toastr
+import { ToastrModule } from 'ngx-toastr'; // para mostrar los toastr
+ 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +19,8 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/gestion/login/login.component';
 import { LoginService } from './service/login.service';
 import { GestionAfiliadoComponent } from './components/gestion/gestion-afiliado/gestion-afiliado.component';
+import { GestionServicioComponent } from './components/gestion/gestion-servicio/gestion-servicio.component';
+import { ServicioComponent } from './components/vista-usuario/servicio/servicio.component';
 
 
 @NgModule({
@@ -25,7 +31,9 @@ import { GestionAfiliadoComponent } from './components/gestion/gestion-afiliado/
     GestionUsuarioComponent,
     HomeComponent,
     LoginComponent,
-    GestionAfiliadoComponent
+    GestionAfiliadoComponent,
+    GestionServicioComponent,
+    ServicioComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +41,9 @@ import { GestionAfiliadoComponent } from './components/gestion/gestion-afiliado/
     FormsModule,
     HttpClientModule,
     NgxDataTableModule,
+    AlifeFileToBase64Module,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [LoginService],
   bootstrap: [AppComponent]

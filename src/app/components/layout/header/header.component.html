@@ -12,11 +12,17 @@
           <li class="nav-item active">
             <a class="btn btn-outline-dark mx-2" [routerLink]="['home']" routerLinkActive="active" >Inicio</a>
           </li>
-          <li *ngIf="_servLogin.usuarioLogeado.perfil == 'administrador'" class="nav-item active">
-            <a class="btn btn-outline-dark mx-2" [routerLink]="['gestion-usuario']" routerLinkActive="active" >Usuarios</a>
+          <li *ngIf="_servLogin.usuarioLogeado.perfil == 'socio' || _servLogin.usuarioLogeado.perfil == 'administrador' || _servLogin.usuarioLogeado.perfil == 'administrativo'" class="nav-item active">
+            <a class="btn btn-outline-dark mx-2" [routerLink]="['vista-servicio']" routerLinkActive="active" >Servicios</a>
           </li>
           <li *ngIf="_servLogin.usuarioLogeado.perfil == 'administrador'" class="nav-item active">
-            <a class="btn btn-outline-dark mx-2" [routerLink]="['gestion-afiliado']" routerLinkActive="active" >Afiliados</a>
+            <a class="btn btn-outline-dark mx-2" [routerLink]="['gestion-usuario']" routerLinkActive="active" >Crud-Usuarios</a>
+          </li>
+          <li *ngIf="_servLogin.usuarioLogeado.perfil == 'administrador' || _servLogin.usuarioLogeado.perfil == 'administrativo'" class="nav-item active">
+            <a class="btn btn-outline-dark mx-2" [routerLink]="['gestion-afiliado']" routerLinkActive="active" >Crud-Afiliados</a>
+          </li>
+          <li  *ngIf="_servLogin.usuarioLogeado.perfil == 'administrador' || _servLogin.usuarioLogeado.perfil == 'administrativo'" class="nav-item active">
+            <a class="btn btn-outline-dark mx-2" [routerLink]="['gestion-servicio']" routerLinkActive="active" >Crud-Servicios</a>
           </li>
           <li *ngIf="!_servLogin.isUsuarioLogeado" class="nav-item active">
             <a class="btn btn-outline-dark mx-2" [routerLink]="['login']" routerLinkActive="active" >Sign in</a>

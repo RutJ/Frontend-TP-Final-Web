@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
             if (result.user.activo) {
               this._servLogin.isUsuarioLogeado = true;
               this._servLogin.usuarioLogeado = result.user;
+              this.validarUsuarioSocio();
               this._router.navigateByUrl(this.returnUrl);
             }else{
               this.msglogin = "Su cuenta se encuentra inactiva, por favor comunicarse con un administrativo";
@@ -43,6 +44,23 @@ export class LoginComponent implements OnInit {
           console.log("error en conexion");
           console.log(error);
         });
+  }
+
+  private validarUsuarioSocio(){
+    if(this._servLogin.usuarioLogeado.perfil == "socio"){
+      this._servLogin.buscarAfiliadoEmail(this._servLogin.usuarioLogeado.usuario).subscribe(
+        (result) => {
+          console.log(result);
+          this._servLogin.isAfiliadoLogeado = true;
+          this._servLogin.afiliadoLogeado = result.afi;
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+    }else{
+      this._servLogin.logoutAfiliado();
+    }
   }
 
   ngOnInit(): void {

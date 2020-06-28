@@ -1,5 +1,4 @@
-<div *ngIf="_servLogin.usuarioLogeado.perfil == 'administrador'">
-
+<div *ngIf="_servLogin.usuarioLogeado.perfil == 'administrador' || _servLogin.usuarioLogeado.perfil == 'administrativo'">
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3">
@@ -46,29 +45,20 @@
                     <div class="form-group row">
                         <label for="email">Email del afiliado</label>
                         <input type="email" name="email" id="email" class="form-control"
-                        [(ngModel)]="afiliado.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$" #emailV="ngModel">
+                        [(ngModel)]="afiliado.email" required  #emailV="ngModel" (change)="validarNombreUsuario()">
                         <!--Validacion-->
                         <div *ngIf="emailV.invalid && (emailV.dirty || emailV.touched)">
                             <div *ngIf="emailV.errors.required">
                                 <small class="text-danger"><Strong>*Campo Obligatorio</Strong></small>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="imagen">Foto del afiliado</label>
-                        <input type="text" name="imagen" id="imagen" class="form-control"
-                        [(ngModel)]="afiliado.imagen" required #imagenV="ngModel">
-                        <!--Validacion-->
-                        <div *ngIf="imagenV.invalid && (imagenV.dirty || imagenV.touched)">
-                            <div *ngIf="imagenV.errors.required">
-                                <small class="text-danger"><Strong>*Campo Obligatorio</Strong></small>
-                            </div>
+                        <div *ngIf="buscarUsuario || buscarAfiliado">
+                            <small class="text-danger"><Strong>*Email no disponible</Strong></small>
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label for="telefono">Email del afiliado</label>
+                        <label for="telefono">Telefono</label>
                         <input type="number" name="telefono" id="telefono" class="form-control"
                         [(ngModel)]="afiliado.telefono" required #telefonoV="ngModel">
                         <!--Validacion-->
@@ -79,12 +69,23 @@
                         </div>
                     </div>
 
+                    <div class="form-group row">
+                        <label for="imagen">Foto del afiliado</label>
+                        <input type="file" name="imagen" id="imagen" class="form-control" alife-file-to-base64 (onFileChanged)="onFilesChanges($event)">
+                    </div>
+                    
+                    <div *ngIf="showModAfiliado" class="form-group row">
+                        <label for="imagenActual" class="col-md-12">Imagen actual</label>
+                        <img src="{{afiliado.imagen}}" height="100px" class="col-md-4 offset-md-4">
+
+                    </div>
+
                     <div class="text-center">
-                        <button *ngIf="!showModAfiliado" class="btn btn-success w-50" (click)="crearAfiliado()" [disabled]="formCrearAfiliado.form.invalid">Crear</button>
+                        <button *ngIf="!showModAfiliado" class="btn btn-success w-50" (click)="crearAfiliado()" [disabled]="formCrearAfiliado.form.invalid || (buscarUsuario || buscarAfiliado) || !validarImagen">Crear</button>
 
                         <button *ngIf="showModAfiliado" class="btn btn-danger mx-5" (click)="cancelarModificar()">Cancelar</button>
                         
-                        <button *ngIf="showModAfiliado" class="btn btn-success mx-5" (click)="modificarAfiliado()"[disabled]="formCrearAfiliado.form.invalid">Modificar</button>
+                        <button *ngIf="showModAfiliado" class="btn btn-success mx-5" (click)="modificarAfiliado()"[disabled]="formCrearAfiliado.form.invalid || (buscarUsuario || buscarAfiliado) || !validarImagen">Modificar</button>
                     </div>
                 </form>
             </div>
@@ -108,6 +109,9 @@
                             <th>
                                 <mfDefaultSorter by="email">Email</mfDefaultSorter>
                             </th>
+                            <th>
+                                Imagen
+                            </th>
                             <th colspan="2">
                                 Acciones
                             </th>
@@ -119,8 +123,10 @@
                             <td>{{afiliado.nombres}}</td>
                             <td>{{afiliado.dni}}</td>
                             <td>{{afiliado.email}}</td>
+                            <td><img src="{{afiliado.imagen}}" height="50px" width="50px"></td>
                             <td><button class="btn btn-primary" (click)="mostrarModificar(afiliado)">Modificar</button></td>
                             <td><button class="btn btn-danger" (click)="eliminarAfiliado(afiliado._id)">Eliminar</button></td>
+                            <td><button class="btn btn-success" (click)="crearSocio(afiliado)">Socio</button></td>
                         </tr>
                     </tbody>
                     <tfoot>
@@ -135,4 +141,4 @@
         </div>
     </div>
 </div>
-<div *ngIf="_servLogin.usuarioLogeado.perfil != 'administrador'"><img src="https://media.tenor.com/images/b65504dbb7eeafc34f3ae35c455cf10f/tenor.gif" height="100%" width="100%"></div>
+<div *ngIf="_servLogin.usuarioLogeado.perfil != 'administrador' && _servLogin.usuarioLogeado.perfil != 'administrativo'"><img src="https://media.tenor.com/images/b65504dbb7eeafc34f3ae35c455cf10f/tenor.gif" height="100%" width="100%"></div>

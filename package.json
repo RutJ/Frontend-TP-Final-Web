@@ -11,7 +11,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~9.1.9",
+    "@angular/animations": "^9.1.11",
     "@angular/common": "~9.1.9",
     "@angular/compiler": "~9.1.9",
     "@angular/core": "~9.1.9",
@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "~9.1.9",
     "@angular/router": "~9.1.9",
     "@fortawesome/fontawesome-free": "^5.13.1",
+    "alife-file-to-base64": "0.0.4",
     "angular-9-datatable": "^0.1.1",
     "bootstrap": "^4.5.0",
     "jquery": "^3.5.1",

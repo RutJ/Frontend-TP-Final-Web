@@ -1,0 +1,28 @@
+<div *ngIf="_servLogin.usuarioLogeado.perfil == 'administrador' || _servLogin.usuarioLogeado.perfil == 'administrativo' || _servLogin.usuarioLogeado.perfil == 'socio'">
+    <div class="container">
+        <div class="row">
+            <h1>Mis servicios</h1>
+            <div *ngFor="let visitado of listaServiciosVisitados" class="col-md-8 offset-md-2">
+                <div class="card">
+                    <img src="{{visitado.imagen}}" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">{{visitado.nombre}}</h5>
+                        <p class="card-text">{{visitado.descripcion}}</p>
+                        <button class="btn btn-danger" (click)="darBaja(visitado)">Dar de Baja</button>
+                    </div>
+                </div>
+            </div>
+            <h1>Servicios Disponibles</h1>
+            <div *ngFor="let noVisitado of listaServiciosNoVisitados" class="col-md-8 offset-md-2">
+                <div class="card">
+                    <img src="{{noVisitado.imagen}}" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">{{noVisitado.nombre}}</h5>
+                        <p class="card-text">{{noVisitado.descripcion}}</p>
+                        <button class="btn btn-success" (click)="inscribirAfiliado(noVisitado)">Inscribirse</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
