@@ -21,6 +21,7 @@ import { LoginService } from './service/login.service';
 import { GestionAfiliadoComponent } from './components/gestion/gestion-afiliado/gestion-afiliado.component';
 import { GestionServicioComponent } from './components/gestion/gestion-servicio/gestion-servicio.component';
 import { ServicioComponent } from './components/vista-usuario/servicio/servicio.component';
+import { GestionNovedadComponent } from './components/gestion/gestion-novedad/gestion-novedad.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { ServicioComponent } from './components/vista-usuario/servicio/servicio.
     LoginComponent,
     GestionAfiliadoComponent,
     GestionServicioComponent,
-    ServicioComponent
+    ServicioComponent,
+    GestionNovedadComponent
   ],
   imports: [
     BrowserModule,

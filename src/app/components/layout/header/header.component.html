@@ -24,6 +24,9 @@
           <li  *ngIf="_servLogin.usuarioLogeado.perfil == 'administrador' || _servLogin.usuarioLogeado.perfil == 'administrativo'" class="nav-item active">
             <a class="btn btn-outline-dark mx-2" [routerLink]="['gestion-servicio']" routerLinkActive="active" >Crud-Servicios</a>
           </li>
+          <li  *ngIf="_servLogin.usuarioLogeado.perfil == 'socio' || _servLogin.usuarioLogeado.perfil == 'administrador' || _servLogin.usuarioLogeado.perfil == 'administrativo'" class="nav-item active">
+            <a class="btn btn-outline-dark mx-2" [routerLink]="['gestion-novedad']" routerLinkActive="active" >Crud-Novedades</a>
+          </li>
           <li *ngIf="!_servLogin.isUsuarioLogeado" class="nav-item active">
             <a class="btn btn-outline-dark mx-2" [routerLink]="['login']" routerLinkActive="active" >Sign in</a>
           </li>

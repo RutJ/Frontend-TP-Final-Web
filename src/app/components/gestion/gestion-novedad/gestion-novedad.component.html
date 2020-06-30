@@ -1,0 +1,140 @@
+<!-----------------------------  VISTA DE SOCIO  ----------------------------->
+<div *ngIf="_servLogin.usuarioLogeado.perfil == 'socio'">
+    <h3 class="display-3 text-center">NOVEDADES</h3>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="col-md-12">
+                    <!---------------- FORMULARIO ------------------>
+                    <form class="card" #formNovedad="ngForm">
+                        <h3 class="row card-header">Nueva Novedad</h3>
+                        <div class="mb-4 card-body">
+                            <div class="form-group">
+                                <label for="titulo">Asunto</label>
+                                <input type="text" placeholder="Asunto" name="titulo" 
+                                    class="form-control" id="titulo"  
+                                    required [(ngModel)]="novedad.asunto" #titulo="ngModel">
+                            </div>
+
+                            <div *ngIf="titulo.invalid && (titulo.dirty || titulo.touched)">
+                                <div *ngIf="titulo.errors.required">
+                                    <small class="text-danger"><Strong>Debe ingresar un asunto</Strong></small>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="textoNovedad">Novedad</label>
+                                <textarea 
+                                    class="form-control" id="textoNovedad" name="novedad"
+                                    placeholder="Escriba su novedad aqui" 
+                                    required [(ngModel)]="novedad.texto" #texto="ngModel">
+                                </textarea>
+
+                                <div *ngIf="texto.invalid && (texto.dirty || texto.touched)">
+                                    <div *ngIf="texto.errors.required">
+                                        <small class="text-danger"><Strong>Debe ingresar una novedad</Strong></small>
+                                    </div>
+                                </div>
+                            </div>
+                            <!----------- BOTONES ---------->
+                            <div class="form-group text-center">
+                                <button *ngIf="!novedadMod" class="btn btn-success" 
+                                (click)="enviarNovedad()" [disabled]="formNovedad.invalid">Enviar</button>
+
+                                <button *ngIf="novedadMod" class="btn btn-danger"
+                                (click)="cancelarModificar()">Cancelar</button>
+                                
+                                <button *ngIf="novedadMod" class="btn btn-success" 
+                                (click)="modificarNovedad()"[disabled]="formNovedad.invalid">Modificar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>  
+            </div>
+        </div>
+        <div class="row">
+            <!----------TABLA------------>
+            <h3 class="card-header col-12 text-center">Novedades pendientes</h3>
+            <table class="table table-striped text-center" [mfData]="novedades" #mf="mfDataTable"
+            [mfRowsOnPage]="5">
+                <thead>
+                    <tr>
+                        <th>
+                            <mfDefaultSorter by="asunto">Asunto</mfDefaultSorter>
+                        </th>
+                        <th>
+                            <mfDefaultSorter by="texto">Texto</mfDefaultSorter>
+                        </th>
+                        <th>
+                            <mfDefaultSorter by="usuario">Fecha</mfDefaultSorter>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let novedad of mf.data">
+                        <td *ngIf="novedad.estado=='pendiente'">{{novedad.asunto}}</td>
+                        <td *ngIf="novedad.estado=='pendiente'" >{{novedad.texto}}</td>
+                        <td *ngIf="novedad.estado=='pendiente'">{{novedad.fecha | date: 'shortDate'}}</td>
+                        <td *ngIf="novedad.estado=='pendiente'">
+                            <button 
+                            class="btn btn-primary" (click)="mostrarModificar(novedad)">Modificar
+                            </button>
+                        </td>
+                        <td *ngIf="novedad.estado=='pendiente'">
+                            <button 
+                            class="btn btn-danger" (click)="eliminarNovedad(novedad)">Eliminar
+                            </button>
+                        </td>    
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>    
+</div>
+<!-----------------------------  VISTA DE ADMIN  ----------------------------->
+<div *ngIf="_servLogin.usuarioLogeado.perfil == 'administrador' || _servLogin.usuarioLogeado.perfil == 'administrativo'">
+    <h3 class="display-3 text-center">NOVEDADES</h3>
+    <div class="container">
+        <div class="row">
+            <div  class="col mb-4 col-md-7 offset-md-3">
+                <!-------------CARDS DE NOVEDADES-------------->
+                <div *ngFor="let item of novedades">
+                    <div class="card text-center">
+                        <div class="row card-header">
+                            Usuario: {{item.usuario.usuario}}
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Asunto: {{item.asunto}}</h5>
+                            <p class="card-text">{{item.texto}}</p>
+                            <button class="btn btn-primary" (click)="verNovedad(item)"
+                                data-toggle="modal" data-target="#staticBackdrop">Ver Novedad
+                            </button>
+                            <button *ngIf="item.estado=='procesado'"
+                                class="btn btn-danger" (click)="eliminarNovedad(item)">Eliminar
+                            </button>
+                        </div>
+                        <div class="card-footer text-muted">
+                          {{item.fecha | date: 'shortDate'}}
+                        </div>
+                      </div>
+                </div>
+            </div>            
+        </div>
+    </div>
+
+    <!-------------VENTANA MODAL DE NOVEDAD---------------->
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static"
+        data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" 
+        aria-hidden="true"> 
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body">
+                {{textoVer}}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary text-center" data-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>  
+</div>
