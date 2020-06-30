@@ -1,0 +1,122 @@
+<div *ngIf="_servLogin.usuarioLogeado.perfil == 'administrador' || _servLogin.usuarioLogeado.perfil == 'administrativo'">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+            <!-----------------REGISTRO DE PAGOS-------------------->
+
+                <h3 class="display-3 text-center">Crear Pago</h3>
+                <form #formCrearPago="ngForm">
+                  <div class="form-group row">
+                    <label for="email"> Email de Afiliado </label>
+                    <input type="email" name="email" id="email" class="form-control"
+                    [(ngModel)]="eMail" required #email="ngModel">
+
+                    <!-- Validacion -->
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                        <div *ngIf="email.errors.required">
+                            <small class="text-danger"><Strong>*Email de afiliado Obligatorio</Strong></small>
+                        </div>
+                    </div>
+                    <!--Buscar-->
+                    <div class="text-center">
+                      <button class="btn btn-success mx-5"
+                          (click)="obtenerAfiliadoPorEmail()">Buscar</button>
+                    </div>
+                  </div>
+
+                  <div *ngIf="mostrar" class="form-group row">
+                    <label for="monto"> Monto </label>
+                    <input type="number" name="monto" id="monto" class="form-control"
+                    [(ngModel)]="pago.monto" required #monto="ngModel">
+                    <!-- Validacion -->
+                    <div *ngIf="monto.invalid && (monto.dirty || monto.touched)">
+                        <div *ngIf="monto.errors.required">
+                            <small class="text-danger"><Strong>*Monto Obligatorio</Strong></small>
+                        </div>
+                    </div>
+                  </div>
+
+                  <div *ngIf="mostrar" class="form-group row">
+                    <label for="mes"> Mes </label>
+                    <input type="number" name="mes" id="mes" class="form-control"
+                    [(ngModel)]="pago.mes" required #mes="ngModel">
+                    <!-- Validacion -->
+                    <div *ngIf="mes.invalid && (mes.dirty || mes.touched)">
+                        <div *ngIf="mes.errors.required">
+                            <small class="text-danger"><Strong>*Mes Obligatorio</Strong></small>
+                        </div>
+                    </div>
+                  </div>
+
+                  <div *ngIf="mostrar" class="form-group row">
+                    <label for="anio"> Año </label>
+                    <input type="number" name="anio" id="anio" class="form-control" 
+                    [(ngModel)]="pago.anio" required #anio="ngModel">
+                    <!-- Validacion -->
+                    <div *ngIf="anio.invalid && (anio.dirty || anio.touched)">
+                        <div *ngIf="anio.errors.required">
+                            <small class="text-danger"><Strong>*Año Obligatorio</Strong></small>
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="text-center">
+                    <button *ngIf="!showModPago && mostrar" class="btn btn-success w-50" (click)="crearPago()" [disabled]="formCrearPago.form.invalid">Crear</button>
+                      <button *ngIf="showModPago" class="btn btn-danger mx-5" (click)="cancelarModificar()">Cancelar</button>
+                      <button *ngIf="showModPago" class="btn btn-success mx-5" (click)="modificarPago()"[disabled]="formCrearPago.form.invalid">Modificar</button>
+                  </div>
+                </form>
+            </div>
+            
+            <!------------------------------- TABLA DE PAGOS ----------------------------------------------->
+
+            <div class="col-12">
+                <table class="table table-striped text-center" [mfData]="pagos" #mf="mfDataTable"
+                [mfRowsOnPage]="5">
+                    <thead>
+                        <tr>
+                            <th>
+                                <mfDefaultSorter by="afiliado">Afiliado</mfDefaultSorter>
+                            </th>
+                            <th>
+                                <mfDefaultSorter by="monto">Monto</mfDefaultSorter>
+                            </th>
+                            <th>
+                                <mfDefaultSorter by="mes">Mes</mfDefaultSorter>
+                            </th>
+                            <th>
+                                <mfDefaultSorter by="anio">Año</mfDefaultSorter>
+                            </th>
+                            <th>
+                                <mfDefaultSorter by="fecha">Fecha</mfDefaultSorter>
+                            </th>
+          
+                            <th colspan="2">
+                                Acciones
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of mf.data">
+                            <td>{{item.afiliado.email}}</td>
+                            <td>{{item.monto}}</td>
+                            <td>{{item.mes}}</td>
+                            <td>{{item.anio}}</td>
+                            <td>{{item.fecha | date:'short'}}</td>
+                            <td><button class="btn btn-primary" (click)="mostrarModificar(item)">Modificar</button></td>
+                            <td><button class="btn btn-danger" (click)="eliminarPago(item._id)">Eliminar</button></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4">
+                                <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="_servLogin.usuarioLogeado.perfil != 'administrador' && _servLogin.usuarioLogeado.perfil != 'administrativo'"><img src="https://media.tenor.com/images/b65504dbb7eeafc34f3ae35c455cf10f/tenor.gif" height="100%" width="100%"></div>
