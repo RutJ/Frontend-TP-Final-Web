@@ -8,27 +8,28 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto py-3">
           <li class="nav-item active">
-            <a class="btn btn-outline-dark mx-2" [routerLink]="['home']" routerLinkActive="active" >Inicio</a>
+            <a class="btn btn-success mx-2" [routerLink]="['home']" routerLinkActive="active" >Inicio</a>
           </li>
           <li *ngIf="_servLogin.usuarioLogeado.perfil == 'socio' || _servLogin.usuarioLogeado.perfil == 'administrador' || _servLogin.usuarioLogeado.perfil == 'administrativo'" class="nav-item active">
-            <a class="btn btn-outline-dark mx-2" [routerLink]="['vista-servicio']" routerLinkActive="active" >Servicios</a>
+            <a class="btn btn-success mx-2" [routerLink]="['vista-servicio']" routerLinkActive="active" >Servicios</a>
           </li>
-          <li *ngIf="_servLogin.usuarioLogeado.perfil == 'administrador'" class="nav-item active">
-            <a class="btn btn-outline-dark mx-2" [routerLink]="['gestion-usuario']" routerLinkActive="active" >Crud-Usuarios</a>
+          <li  *ngIf="_servLogin.usuarioLogeado.perfil == 'socio'" class="nav-item active">
+            <a class="btn btn-success mx-2" [routerLink]="['gestion-novedad']" routerLinkActive="active" >Novedades</a>
           </li>
-          <li *ngIf="_servLogin.usuarioLogeado.perfil == 'administrador' || _servLogin.usuarioLogeado.perfil == 'administrativo'" class="nav-item active">
-            <a class="btn btn-outline-dark mx-2" [routerLink]="['gestion-afiliado']" routerLinkActive="active" >Crud-Afiliados</a>
-          </li>
-          <li  *ngIf="_servLogin.usuarioLogeado.perfil == 'administrador' || _servLogin.usuarioLogeado.perfil == 'administrativo'" class="nav-item active">
-            <a class="btn btn-outline-dark mx-2" [routerLink]="['gestion-servicio']" routerLinkActive="active" >Crud-Servicios</a>
-          </li>
-          <li  *ngIf="_servLogin.usuarioLogeado.perfil == 'socio' || _servLogin.usuarioLogeado.perfil == 'administrador' || _servLogin.usuarioLogeado.perfil == 'administrativo'" class="nav-item active">
-            <a class="btn btn-outline-dark mx-2" [routerLink]="['gestion-novedad']" routerLinkActive="active" >Crud-Novedades</a>
-          </li>
-          <li  *ngIf="_servLogin.usuarioLogeado.perfil == 'administrador' || _servLogin.usuarioLogeado.perfil == 'administrativo'" class="nav-item active">
-            <a class="btn btn-outline-dark mx-2" [routerLink]="['gestion-pago']" routerLinkActive="active" >Crud-Pagos</a>
+          <li *ngIf="_servLogin.usuarioLogeado.perfil == 'administrador' || _servLogin.usuarioLogeado.perfil == 'administrativo'" class="nav-item dropdown">
+            <a class="dropdown-toggle btn btn-success mx-2" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Gestion
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a *ngIf="_servLogin.usuarioLogeado.perfil == 'administrador'" class="btn btn-success dropdown-item" [routerLink]="['gestion-usuario']" routerLinkActive="active" >Usuarios</a>
+              <a class="btn btn-success dropdown-item" [routerLink]="['gestion-pago']" routerLinkActive="active" >Pagos</a>
+              <a class="btn btn-success dropdown-item" [routerLink]="['gestion-novedad']" routerLinkActive="active" >Novedades</a>
+              <a class="btn btn-success dropdown-item" [routerLink]="['gestion-servicio']" routerLinkActive="active" >Servicios</a>
+              <a class="btn btn-success dropdown-item" [routerLink]="['gestion-afiliado']" routerLinkActive="active" >Afiliados</a>
+              <a *ngIf="_servLogin.usuarioLogeado.perfil == 'administrativo'" class="btn btn-success dropdown-item" [routerLink]="['gestion-noticia']" routerLinkActive="active" >Noticias</a>
+            </div>
           </li>
           <li *ngIf="!_servLogin.isUsuarioLogeado" class="nav-item active">
             <a class="btn btn-outline-dark mx-2" [routerLink]="['login']" routerLinkActive="active" >Sign in</a>

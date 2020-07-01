@@ -10,6 +10,7 @@ import { LoginComponent } from './components/gestion/login/login.component';
 import { ServicioComponent } from './components/vista-usuario/servicio/servicio.component';
 import { GestionNovedadComponent } from './components/gestion/gestion-novedad/gestion-novedad.component';
 import { GestionPagoComponent } from './components/gestion/gestion-pago/gestion-pago.component';
+import { GestionNoticiaComponent } from './components/gestion/gestion-noticia/gestion-noticia.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'gestion-afiliado', component: GestionAfiliadoComponent},
   { path: 'gestion-servicio', component: GestionServicioComponent},
   { path: 'gestion-novedad', component:GestionNovedadComponent},
+  { path: 'gestion-noticia', component:GestionNoticiaComponent},
   { path: 'gestion-pago', component: GestionPagoComponent},
   { path: 'vista-servicio', component: ServicioComponent},
   { path: 'login', component: LoginComponent },

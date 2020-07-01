@@ -23,6 +23,7 @@ import { GestionServicioComponent } from './components/gestion/gestion-servicio/
 import { ServicioComponent } from './components/vista-usuario/servicio/servicio.component';
 import { GestionNovedadComponent } from './components/gestion/gestion-novedad/gestion-novedad.component';
 import { GestionPagoComponent } from './components/gestion/gestion-pago/gestion-pago.component';
+import { GestionNoticiaComponent } from './components/gestion/gestion-noticia/gestion-noticia.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { GestionPagoComponent } from './components/gestion/gestion-pago/gestion-
     GestionServicioComponent,
     ServicioComponent,
     GestionNovedadComponent,
-    GestionPagoComponent
+    GestionPagoComponent,
+    GestionNoticiaComponent,
   ],
   imports: [
     BrowserModule,

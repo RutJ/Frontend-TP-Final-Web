@@ -1,0 +1,122 @@
+<div *ngIf="_servLogin.usuarioLogeado.perfil == 'administrativo'">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-6 offset-md-3">
+                <!--------------- FORMULARIO DE REGISTRO DE NOTICIAS --------------->
+
+
+                <h1 class="text-center">Crear noticia</h1>
+                <form #formCrearNoticia="ngForm">
+                    <div class="form-group row">
+                        <label for="titulo">Titulo</label>
+                        <input type="text" name="titulo" id="titulo" class="form-control" [(ngModel)]="noticia.titulo"
+                            required #tituloV="ngModel">
+                        <!-- Validacion -->
+                        <div *ngIf="tituloV.invalid && (tituloV.dirty || tituloV.touched)">
+                            <div *ngIf="tituloV.errors.required">
+                                <small class="text-danger"><Strong>*Titulo Obligatorio</Strong></small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="descripcion">Descripcion</label>
+                        <textarea type="text" name="descripcion" id="descripcion" class="form-control"
+                            [(ngModel)]="noticia.descripcion" required #descripcionV="ngModel" cols="10" rows="5"></textarea>
+                        <!-- Validacion -->
+                        <div *ngIf="descripcionV.invalid && (descripcionV.dirty || descripcionV.touched)">
+                            <div *ngIf="descripcionV.errors.required">
+                                <small class="text-danger"><Strong>*Descripcion Obligatoria</Strong></small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="imagen">Imagen</label>
+                        <input type="file" name="imagen" id="imagen" class="form-control" alife-file-to-base64
+                            (onFileChanged)="onFilesChanges($event)">
+                        <!-- Validacion -->
+                        <div *ngIf="validarImagen">
+                            <small class="text-success"><Strong>*Imagen correcta</Strong></small>
+                        </div>
+                        <div *ngIf="!validarImagen">
+                            <small class="text-danger"><Strong>*Eliga otra imagen</Strong></small>
+                        </div>
+                        <div *ngIf="showModificarNoticia" class="form-group row">
+                            <label for="imagenActual" class="col-md-12">Imagen actual</label>
+                            <img src="{{noticia.imagen}}" height="100px" class="col-md-4 offset-md-4">
+    
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button *ngIf="!showModificarNoticia" class="btn btn-success w-50" [disabled]="(!formCrearNoticia.form.valid) || !validarImagen " (click)="crearNoticia()">Crear</button>
+
+                        <button *ngIf="showModificarNoticia" class="btn btn-danger mx-5" (click)="cancelarModificar()">Cancelar</button>
+
+                        <button *ngIf="showModificarNoticia" class="btn btn-success mx-5" [disabled]="(!formCrearNoticia.form.valid) || !validarImagen " (click)="modificarNoticia()">Modificar</button>
+
+                    </div>
+                </form>
+            </div>
+
+
+
+            <!----------------- TABLA DE NOTICA ----------------->
+
+
+            <div class="col-12">
+                <table class="table table-striped text-center" [mfData]="listaNoticias" #mf="mfDataTable"
+                    [mfRowsOnPage]="5">
+                    <thead>
+                        <tr>
+                            <th>
+                                <mfDefaultSorter by="titulo">Titulo</mfDefaultSorter>
+                            </th>
+                            <th>
+                                <mfDefaultSorter by="descripcion">Descripcion</mfDefaultSorter>
+                            </th>
+                            <th>
+                                <mfDefaultSorter by="fecha">Fecha</mfDefaultSorter>
+                            </th>
+                            <th>
+                                <mfDefaultSorter by="usuario">Usuario</mfDefaultSorter>
+                            </th>
+                            <th>
+                                Vigente
+                            </th>
+                            <th>
+                                Imagen
+                            </th>
+                            <th colspan="2">
+                                Acciones
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let noticia of mf.data">
+                            <td>{{noticia.titulo}}</td>
+                            <td>{{noticia.descripcion}}</td>
+                            <td>{{noticia.fecha | date: 'dd/MM/yyyy'}}</td>
+                            <td>{{noticia.usuario.usuario}}</td>
+                            <td>{{noticia.vigente && 'Si' || 'No'}}</td>
+                            <td><img src="{{noticia.imagen}}" width="50px" height="50px"></td>
+                            <td><button class="btn btn-primary" (click)="mostrarModificar(noticia)">Modificar</button>
+                            </td>
+                            <td><button class="btn btn-danger" (click)="modificarEstadoNoticia(noticia)">{{noticia.vigente && 'Desactivar' || 'Activar'}}</button></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4">
+                                <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="_servLogin.usuarioLogeado.perfil != 'administrativo'"><img src="https://media.tenor.com/images/b65504dbb7eeafc34f3ae35c455cf10f/tenor.gif" height="100%" width="100%"></div>

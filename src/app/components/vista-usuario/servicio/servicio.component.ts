@@ -27,12 +27,12 @@ export class ServicioComponent implements OnInit {
     this.listaServicios = new Array<Servicio>();
     this._servServicio.getServicios().subscribe(
       (result) => {
-        console.log(result);
-        result.forEach(element => {
+        this.listaServicios = result;
+        /*result.forEach(element => {
           Object.assign(this.servicio, element);
           this.listaServicios.push(this.servicio);
           this.servicio = new Servicio();         
-        });
+        });*/
         this.verificarServicios();
       },
       (error) => {
@@ -48,16 +48,18 @@ export class ServicioComponent implements OnInit {
       this._servServicio.updateServicio(servicioInscribir).subscribe(
         (result) => {
           console.log(result);
+          this.getServicios();
         },
         (error) => {
           console.log(error);
         }
       )
     }
-    else
+    else{
       console.log("no hay socio");
+    }
 
-    this.getServicios();
+    
   }
 
   public darBaja(servicioBaja:Servicio){
@@ -65,12 +67,12 @@ export class ServicioComponent implements OnInit {
     this._servServicio.updateServicio(servicioBaja).subscribe(
       (result) => {
         console.log(result);
+        this.getServicios();
       },
       (error) => {
         console.log(error);
       }
     )
-    this.getServicios();
   }
 
   /*asigna en un array los servicios inscriptos por el afiliado, y en otro array los servicios no inscriptos*/

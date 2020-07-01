@@ -127,14 +127,11 @@ export class GestionAfiliadoComponent implements OnInit {
   }
 
   onFilesChanges(files){
-    this.validarImagen = false;
-    console.log("Datos del archivo", files);
-    if(files[0].size > 45000)
-      this._toastr.error("La imagen es muy grande","Error");
-    else{
+    if(files[0] != null){
       this.validarImagen = true;
-      this._toastr.success("Imagen correcta","Exito");
       this.afiliado.imagen = files[0].base64;
+    }else{
+      this.validarImagen = false;
     }
   }
 

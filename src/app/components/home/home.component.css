@@ -1,0 +1,17 @@
+#img-fondo{
+    background-image: url("../../../assets/img/fondo.jpg");
+}
+#img-fondo-2{
+    background-image: url("../../../assets/img/fondo-2.jpg");
+}
+
+#img-fondo, #img-fondo-2{
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+.card{
+    background: none;
+    border: none;
+}
