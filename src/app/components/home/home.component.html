@@ -42,7 +42,7 @@
         <div class="col-md-10 offset-md-1">
             <p class="display-4 text-center">Nuestros servicios</p>
             <div  *ngFor="let servicio of listaServicios" class="mb-5 pb-5">
-                <div class="row my-5">
+                <div *ngIf="servicio.activo" class="row my-5">
                     <img src="{{servicio.imagen}}" class="col-md-5" alt="...">
                     <div class=" col-md-7 px-2">
                         <h1>{{servicio.nombre}}</h1>

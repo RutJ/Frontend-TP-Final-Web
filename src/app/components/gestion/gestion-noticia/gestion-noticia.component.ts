@@ -3,6 +3,9 @@ import { Noticia } from 'src/app/models/noticia';
 import { NoticiaService } from 'src/app/service/noticia.service';
 import { ToastrService } from 'ngx-toastr';
 import { LoginService } from 'src/app/service/login.service';
+/*para facebook*/
+import { FacebookService, InitParams, LoginResponse } from 'ngx-fb';
+import { ApiMethod } from 'ngx-fb/dist/esm/providers/facebook';
 
 @Component({
   selector: 'app-gestion-noticia',
@@ -19,11 +22,32 @@ export class GestionNoticiaComponent implements OnInit {
   constructor(
     private _servNotica:NoticiaService,
     private _tostr:ToastrService,
-    public _servLogin:LoginService) {
+    public _servLogin:LoginService,
+    private _fb:FacebookService) {
 
     this.listaNoticias = new Array<Noticia>();
     this.noticia = new Noticia();
     this.getNoticias();
+    this.iniciarFb();
+  }
+
+  /*iniciar en facebook*/
+  iniciarFb() {
+    let initParams: InitParams = {
+      appId: '934317636995922', //mi appId de facebook for developers
+      autoLogAppEvents: true,
+      xfbml: true,
+      version: 'v7.0'
+    };
+    this._fb.init(initParams);
+  }
+  realizarPosteo(noticia:Noticia) {
+    var apiMethod: ApiMethod = "post";
+    this._fb.api('/109421504150971/feed', apiMethod,
+      {
+        "message": noticia.titulo + "\n" + "\n" + noticia.descripcion,
+        "access_token":"EAANRwcbcS1IBALE7SgNHxiYDiaZBambAZC0xlgFnGSsj0thXiqL0ZBI89y7asR8ly749ldRjQZAwHDdYZB9QJ3Cr6SbHCrykV6QA78HljR2zAZB3rsguU0g6zQZCtp8EO4U2s78oJANgXSlGPTZCWpeKhRkkqtuhMsick1LBAbRR2xuoZAQQGsTiJtMuFIjcRZASz25HqAeS91QgZDZD"
+      });
   }
 
   /*crear noticia*/

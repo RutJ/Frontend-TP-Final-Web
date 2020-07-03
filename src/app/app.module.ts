@@ -8,6 +8,7 @@ import { NgxDataTableModule} from "angular-9-datatable"; //angular datatable
 import { AlifeFileToBase64Module } from 'alife-file-to-base64'; //convertir img a base64
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // animacion para los toastr
 import { ToastrModule } from 'ngx-toastr'; // para mostrar los toastr
+import { FacebookModule } from 'ngx-fb'; // para pubicar en facebook
  
 
 import { AppRoutingModule } from './app-routing.module';
@@ -49,7 +50,11 @@ import { GestionNoticiaComponent } from './components/gestion/gestion-noticia/ge
     NgxDataTableModule,
     AlifeFileToBase64Module,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    FacebookModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut:1000,
+      positionClass: 'toast-top-left'
+    })
   ],
   providers: [LoginService],
   bootstrap: [AppComponent]

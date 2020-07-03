@@ -11,15 +11,15 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class GestionUsuarioComponent implements OnInit {
 
-  listaUsuarios:Array<Usuario>;
-  usuario:Usuario;
-  buscarUsuario:boolean=false;
-  showModificarUsuario:boolean = false;
+  listaUsuarios: Array<Usuario>;
+  usuario: Usuario;
+  buscarUsuario: boolean = false;
+  showModificarUsuario: boolean = false;
   constructor(
-    private _servUsuario:UsuarioService,
-    public _servLogin:LoginService,
-    private _toastr:ToastrService
-    ) {
+    private _servUsuario: UsuarioService,
+    public _servLogin: LoginService,
+    private _toastr: ToastrService
+  ) {
 
     this.listaUsuarios = new Array<Usuario>();
     this.usuario = new Usuario();
@@ -27,62 +27,60 @@ export class GestionUsuarioComponent implements OnInit {
   }
 
   /*crear usuario*/
-  public crearUsuario(){
+  public crearUsuario() {
     this.usuario.activo = true;
     this._servUsuario.crearUsuario(this.usuario).subscribe(
       (result) => {
-        //console.log(result);
-        this._toastr.success("Usuario Creado","Exito")
+        this._toastr.success("Usuario Creado", "Exito")
+        this.getUsuarios();
       },
       (error) => {
-        //console.log(error);
-        this._toastr.error("Ha ocurrido un error al crear usuario","Error");
+        console.log(error);
+        this._toastr.error("Ha ocurrido un error al crear usuario", "Error");
       }
     )
-    this.getUsuarios();
   }
 
-  /*eliminar usuario*/
-  public eliminarUsuario(usuarioEliminar:Usuario){
-    usuarioEliminar.activo = false;
-    this._servUsuario.modificarUsuario(usuarioEliminar).subscribe(
+  /*modificar estado usuario*/
+  public modificarEstadoUsuario(usuario: Usuario) {
+    usuario.activo = !usuario.activo;
+    this._servUsuario.modificarUsuario(usuario).subscribe(
       (result) => {
-        //console.log(result);
-        this._toastr.error("Usuario Eliminado","Eliminado");
+        this._toastr.info("Estado del usuario modificado", "Habilitar/Deshabilitar");
+        this.getUsuarios();
       },
       (error) => {
-        //console.log(error);
-        this._toastr.error("Ha ocurrido un error al eliminar usuario","Error");
+        console.log(error);
+        this._toastr.error("Ha ocurrido un error al eliminar usuario", "Error");
       }
     )
-    this.getUsuarios();
   }
 
   /*Modificar usuario*/
-  public modificarUsuario(){
+  public modificarUsuario() {
     this._servUsuario.modificarUsuario(this.usuario).subscribe(
       (result) => {
-        //console.log(result);
-        this._toastr.info("Usuario Modificado","Modificado")
+        this._toastr.info("Usuario Modificado", "Modificado")
+        this.getUsuarios();
+        this.cancelarModificar();
       },
       (error) => {
-        //console.log(error);
-        this._toastr.error("Ha ocurrido un error al modificar usuario","Error");
+        console.log(error);
+        this._toastr.error("Ha ocurrido un error al modificar usuario", "Error");
       }
     )
-    this.cancelarModificar();
   }
-  public mostrarModificar(usuarioModificar:Usuario){
+  public mostrarModificar(usuarioModificar: Usuario) {
     this.usuario = usuarioModificar;
     this.showModificarUsuario = true;
   }
-  public cancelarModificar(){
+  public cancelarModificar() {
     this.usuario = new Usuario();
     this.showModificarUsuario = false;
   }
 
   /*obtener usuarios*/
-  public getUsuarios(){
+  public getUsuarios() {
     this.listaUsuarios = new Array<Usuario>();
     this._servUsuario.getUsuarios().subscribe(
       (result) => {
@@ -99,11 +97,11 @@ export class GestionUsuarioComponent implements OnInit {
   }
 
   /*Validaciones*/
-  public validarNombreUsuario(){
+  public validarNombreUsuario() {
     this._servUsuario.buscarUsuario(this.usuario.usuario).subscribe(
       (result) => {
         console.log(result)
-        if(result.status == 2)
+        if (result.status == 2)
           this.buscarUsuario = true;
         else
           this.buscarUsuario = false

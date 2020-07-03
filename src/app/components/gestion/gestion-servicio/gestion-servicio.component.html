@@ -112,7 +112,7 @@
                                 </tfoot>
                             </table>
                             <button class="btn btn-primary"(click)="mostrarModificar(servicio)">Modificar</button>
-                            <button class="btn btn-danger"(click)="desactivarServicio(servicio)">Desactivar</button>
+                            <button class="btn btn-danger"(click)="modificarEstadoServicio(servicio)">{{servicio.activo && 'Desactivar' || 'Activar'}}</button>
                         </div>
                     </div>
                 </div>

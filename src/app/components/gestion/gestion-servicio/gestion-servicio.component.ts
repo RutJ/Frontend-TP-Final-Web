@@ -60,13 +60,13 @@ export class GestionServicioComponent implements OnInit {
     this._servServicio.updateServicio(this.servicio).subscribe(
       (result) => {
         this._toastr.info("Servicio Modificado", "Modificado");
+        this.getServicios();
+        this.cancelarModificar();
       },
       (error) => {
         this._toastr.error("Ha ocurrido un error con crear servicio", "Error");
       }
     )
-    this.getServicios();
-    this.cancelarModificar();
   }
 
   public cancelarModificar() {
@@ -81,11 +81,12 @@ export class GestionServicioComponent implements OnInit {
   }
 
   /*desactivar servicio*/
-  public desactivarServicio(servicioDesactivar: Servicio) {
-    servicioDesactivar.activo = false;
-    this._servServicio.updateServicio(servicioDesactivar).subscribe(
+  public modificarEstadoServicio(servicio: Servicio) {
+    servicio.activo = !servicio.activo;
+    this._servServicio.updateServicio(servicio).subscribe(
       (result) => {
-        this._toastr.error("Servicio desactivado", "Desactivado");
+        this._toastr.info("Estado de servicio modificado", "Desactivado/Activado");
+        this.getServicios();
       },
       (error) => {
         this._toastr.error("Ha ocurrido un error con desactivar servicio", "Error");
@@ -95,10 +96,10 @@ export class GestionServicioComponent implements OnInit {
 
   /*cargar imagen*/
   onFilesChanges(files) {
-    if(files[0] != null){
+    if (files[0] != null) {
       this.validarImagen = true;
       this.servicio.imagen = files[0].base64;
-    }else{
+    } else {
       this.validarImagen = false;
     }
 

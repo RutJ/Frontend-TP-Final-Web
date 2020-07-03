@@ -105,6 +105,8 @@
                             <td><button class="btn btn-primary" (click)="mostrarModificar(noticia)">Modificar</button>
                             </td>
                             <td><button class="btn btn-danger" (click)="modificarEstadoNoticia(noticia)">{{noticia.vigente && 'Desactivar' || 'Activar'}}</button></td>
+                            <td><button class="btn btn-info" (click)="realizarPosteo(noticia)">Publicar</button>
+                            </td>
                         </tr>
                     </tbody>
                     <tfoot>

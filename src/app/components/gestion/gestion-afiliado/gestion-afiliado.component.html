@@ -45,7 +45,7 @@
                     <div class="form-group row">
                         <label for="email">Email del afiliado</label>
                         <input type="email" name="email" id="email" class="form-control"
-                        [(ngModel)]="afiliado.email" required  #emailV="ngModel" (change)="validarNombreUsuario()">
+                        [(ngModel)]="afiliado.email" required  #emailV="ngModel" (change)="validarEmailAfiliado()">
                         <!--Validacion-->
                         <div *ngIf="emailV.invalid && (emailV.dirty || emailV.touched)">
                             <div *ngIf="emailV.errors.required">
@@ -71,7 +71,7 @@
 
                     <div class="form-group row">
                         <label for="imagen">Foto del afiliado</label>
-                        <input type="file" name="imagen" id="imagen" class="form-control" alife-file-to-base64 (onFileChanged)="onFilesChanges($event)">
+                        <input type="file" name="imagen" id="imagen" class="form-control" alife-file-to-base64 (onFileChanged)="validarImagenCambiada($event)">
                     </div>
                     
                     <div *ngIf="showModAfiliado" class="form-group row">
@@ -91,9 +91,18 @@
             </div>
             
             <!------------------------------- TABLA DE AFILIADOS ----------------------------------------------->
-
+            <div class="col-md-10 offset-md-1">
+                <form>
+                    <div class="form-group row">
+                        <label for="buscar" class="col-md-12">Buscar por nombre o apellido</label>
+                        <input type="text" name="buscar" id="buscar" class="form-control col-md-10" [(ngModel)]="filtrarTabla">
+                        
+                        <button class="btn btn-primary col-md-2" (click)="filtrar()">Filtrar</button>
+                    </div>
+                </form>
+            </div>
             <div class="col-12">
-                <table class="table table-striped text-center" [mfData]="listaAfiliados" #mf="mfDataTable"
+                <table class="table table-striped text-center" [mfData]="listaAfiliadosFiltro" #mf="mfDataTable"
                 [mfRowsOnPage]="5">
                     <thead>
                         <tr>
@@ -141,4 +150,5 @@
         </div>
     </div>
 </div>
+
 <div *ngIf="_servLogin.usuarioLogeado.perfil != 'administrador' && _servLogin.usuarioLogeado.perfil != 'administrativo'"><img src="https://media.tenor.com/images/b65504dbb7eeafc34f3ae35c455cf10f/tenor.gif" height="100%" width="100%"></div>

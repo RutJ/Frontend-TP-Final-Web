@@ -9,15 +9,19 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto py-3">
+          <!-- INICIO -->
           <li class="nav-item active">
             <a class="btn btn-success mx-2" [routerLink]="['home']" routerLinkActive="active" >Inicio</a>
           </li>
+          <!-- VISTA SERVICIOS -->
           <li *ngIf="_servLogin.usuarioLogeado.perfil == 'socio' || _servLogin.usuarioLogeado.perfil == 'administrador' || _servLogin.usuarioLogeado.perfil == 'administrativo'" class="nav-item active">
             <a class="btn btn-success mx-2" [routerLink]="['vista-servicio']" routerLinkActive="active" >Servicios</a>
           </li>
+          <!-- VISTA NOVEDADES -->
           <li  *ngIf="_servLogin.usuarioLogeado.perfil == 'socio'" class="nav-item active">
             <a class="btn btn-success mx-2" [routerLink]="['gestion-novedad']" routerLinkActive="active" >Novedades</a>
           </li>
+          <!-- DROPDOWN GESTION -->
           <li *ngIf="_servLogin.usuarioLogeado.perfil == 'administrador' || _servLogin.usuarioLogeado.perfil == 'administrativo'" class="nav-item dropdown">
             <a class="dropdown-toggle btn btn-success mx-2" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Gestion
@@ -31,12 +35,28 @@
               <a *ngIf="_servLogin.usuarioLogeado.perfil == 'administrativo'" class="btn btn-success dropdown-item" [routerLink]="['gestion-noticia']" routerLinkActive="active" >Noticias</a>
             </div>
           </li>
+          <!-- SIGN IN -->
           <li *ngIf="!_servLogin.isUsuarioLogeado" class="nav-item active">
             <a class="btn btn-outline-dark mx-2" [routerLink]="['login']" routerLinkActive="active" >Sign in</a>
           </li>
+          <!-- DROPDOWN USUARIO LOGEADO -->
           <li *ngIf="_servLogin.isUsuarioLogeado" class="nav-item active">
-            <a class="btn btn-danger mx-2" (click)="logout()" ><i class="fas fa-sign-out-alt"></i></a>
+            <div class="nav-item dropdown">
+              <a class="dropdown-toggle btn btn-success mx-2" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{_servLogin.usuarioLogeado.usuario}}
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Cambiar Contraseña</a>
+                <div class="dropdown-divider"></div>
+                <a class="btn mx-2" (click)="logout()" ><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+              </div>
+            </div>
           </li>
+          <!-- IMAGEN USUARIO SOCIO-AFILIADO -->
+          <li *ngIf="_servLogin.isUsuarioLogeado" class="nav-item active">
+            <img src="{{_servLogin.afiliadoLogeado.imagen}}" width="50px" height="50px">
+          </li>
+
         </ul>
       </div>
     </nav>

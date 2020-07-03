@@ -41,7 +41,7 @@
                     <div class="form-group row">
                         <label for="perfil">Tipo de usuario</label>
                         <select name="perfil" id="perfil" class="form-control" [(ngModel)]="usuario.perfil" required
-                            #perfilV="ngModel">
+                            #perfilV="ngModel" [disabled]="showModificarUsuario">
                             <option value="administrativo">Administrativo</option>
                             <option value="administrador">Administrador</option>
                             <option value="gerente">Gerente</option>
@@ -99,7 +99,7 @@
                             <td>{{usuario.perfil}}</td>
                             <td><button class="btn btn-primary" (click)="mostrarModificar(usuario)">Modificar</button>
                             </td>
-                            <td><button class="btn btn-danger" (click)="eliminarUsuario(usuario)">Eliminar</button></td>
+                            <td><button class="btn btn-danger" (click)="modificarEstadoUsuario(usuario)">{{usuario.activo && 'Deshabilitar' || 'Habilitar'}}</button></td>
                         </tr>
                     </tbody>
                     <tfoot>
