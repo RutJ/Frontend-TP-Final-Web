@@ -1,58 +1,58 @@
-<div id="img-fondo" class="container-fluid">
-    <div class="py-5 row">
-        <div class="card py-5 col-md-4 offset-md-7" style="height: 400px;">
-            <div class="card-body text-white">
-                <p class="card-title display-4">TITULO</p>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of thecard's content.</p>
+<div class="my-bg-dark-2 text-white">
+    <div id="img-fondo" class="container-fluid">
+        <div class="py-5 row">
+            <div class="card py-5 col-md-4 offset-md-7" style="height: 500px;">
+                <div class="card-body text-white">
+                    <p class="card-title my-title">TITULO</p>
+                    <p class="card-text my-text-md">Some quick example text to build on the card title and make up the bulk of thecard's content.</p>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="container">
-    <div class="row py-5">
-        <div class="col-md-10 offset-md-1">
-            <p class="display-4 text-center">Noticias</p>
-            <div  *ngFor="let noticia of listaNoticias" class="mb-5">
-                <div *ngIf="noticia.vigente" class="card">
-                    <img src="{{noticia.imagen}}" class="card-img-top" >
-                    <div class="card-body p-0">
-                        <small class="ml-auto bg-dark p-1 text-white"><strong>{{noticia.fecha | date: 'dd/MM/yyyy'}}</strong></small>
-                        <h2 class="card-title mt-2">{{noticia.titulo}}</h2>
-                        <p class="card-text">{{noticia.descripcion}}</p>
-                        <p class="card-text text-right"><small class="text-muted">Publicado por: {{noticia.usuario.usuario}}</small></p>
+    <div class="container">
+        <div class="row py-5">
+            <div id="noticias" class="col-md-8 offset-md-2">
+                <p class="my-title">NOTICIAS</p>
+                <div *ngFor="let noticia of listaNoticias" class="mb-5">
+                    <div *ngIf="noticia.vigente" class="card">
+                        <img src="{{noticia.imagen}}" class="card-img-top" height="500px">
+                        <p class="p-1 text-white mr-auto my-bg-green"><strong>{{noticia.fecha | date: 'dd/MM/yyyy'}}</strong></p>
+                        <div class="card-body p-0 px-4">
+                            <p class="card-title mt-2 my-text-lg">{{noticia.titulo}}</p>
+                            <p class="card-text my-text-md">{{noticia.descripcion}}</p>
+                            <p class="card-text text-right"><small class="my-text-color">Publicado por: {{noticia.usuario.usuario}}</small></p>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
-</div>
-<div id="img-fondo-2" class="container-fluid">
-    <div class="py-5 row">
-        <div class="card py-5 col-md-4 offset-md-7">
-            <div class="card-body text-white">
-                <p class="card-title display-4">Servicios</p>
-                <p class="card-text">Enterate de todos los servicios que podes acceder siendo afiliado de nuestra obra social</p>
+    <div id="img-fondo-2" class="container-fluid">
+        <div class="py-5 row">
+            <div class="card py-5 col-md-4 offset-md-7" style="height: 300px;">
+                <div class="card-body text-white">
+                    <p class="card-title my-title">Servicios</p>
+                    <p class="card-text my-text-md">Enterate de todos los servicios que podes acceder siendo afiliado de nuestra obra social</p>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="container">
-    <div class="row py-5">
-        <div class="col-md-10 offset-md-1">
-            <p class="display-4 text-center">Nuestros servicios</p>
-            <div  *ngFor="let servicio of listaServicios" class="mb-5 pb-5">
-                <div *ngIf="servicio.activo" class="row my-5">
-                    <img src="{{servicio.imagen}}" class="col-md-5" alt="...">
-                    <div class=" col-md-7 px-2">
-                        <h1>{{servicio.nombre}}</h1>
-                        <p>{{servicio.descripcion}}</p>
-                        <a *ngIf="!_servLogin.isUsuarioLogeado" class="btn btn-success" [routerLink]="['/login']">Enterate más</a>
-                        <a *ngIf="_servLogin.isUsuarioLogeado" class="btn btn-success" [routerLink]="['/vista-servicio']">Enterate más</a>
+    <div class="container">
+        <div class="row py-5">
+            <div class="col-md-10 offset-md-1">
+                <p class="my-title">SERVICIOS</p>
+                <div  *ngFor="let servicio of listaServicios">
+                    <div *ngIf="servicio.activo" class="row my-5">
+                        <img src="{{servicio.imagen}}" class="col-md-5" height="250px">
+                        <div class=" col-md-7 px-2">
+                            <p class="my-text-lg">{{servicio.nombre}}</p>
+                            <p class="my-text-sm">{{servicio.descripcion}}</p>
+                            <a *ngIf="!_servLogin.isUsuarioLogeado" class="btn my-btn" [routerLink]="['/login']">Enterate más</a>
+                            <a *ngIf="_servLogin.isUsuarioLogeado" class="btn my-btn" [routerLink]="['/vista-servicio']">Enterate más</a>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

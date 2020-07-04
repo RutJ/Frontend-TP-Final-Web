@@ -15,3 +15,17 @@
     background: none;
     border: none;
 }
+#noticias .card{
+    border: 2px solid #4DC26B;
+}
+.my-btn{
+    border: 1px solid #4DC26B;
+    color: #4DC26B;
+    transition: font-size .6s;
+}
+.my-btn:hover{
+    background: linear-gradient(to right, #74d48c, #4DC26B);
+    border: 1px solid #4DC26B;
+    color: #ffffff;
+    font-size: 19px;
+}
