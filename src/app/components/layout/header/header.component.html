@@ -1,7 +1,9 @@
 <div class="container-fluid">
   <div class="row">
-    <nav class="col-md-12 navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Icon</a>
+    <nav class="col-md-12 navbar navbar-expand-lg navbar-dark bg-dark">
+      
+      <img src="../../../assets/img/ambulance-01.png" class="img-fluid">
+      <div class="text-white h3 mx-md-5 mx-sm-1">OBRA SOCIAL <br><br> "NO SE QUE PONER"</div>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -11,49 +13,49 @@
         <ul class="navbar-nav ml-auto py-3">
           <!-- INICIO -->
           <li class="nav-item active">
-            <a class="btn btn-success mx-2" [routerLink]="['home']" routerLinkActive="active" >Inicio</a>
+            <a class="btn btn-success mx-2 text-white" [routerLink]="['home']" routerLinkActive="active" >Inicio</a>
           </li>
           <!-- VISTA SERVICIOS -->
           <li *ngIf="_servLogin.usuarioLogeado.perfil == 'socio' || _servLogin.usuarioLogeado.perfil == 'administrador' || _servLogin.usuarioLogeado.perfil == 'administrativo'" class="nav-item active">
-            <a class="btn btn-success mx-2" [routerLink]="['vista-servicio']" routerLinkActive="active" >Servicios</a>
+            <a class="btn btn-success mx-2 text-white" [routerLink]="['vista-servicio']" routerLinkActive="active" >Servicios</a>
           </li>
           <!-- VISTA NOVEDADES -->
           <li  *ngIf="_servLogin.usuarioLogeado.perfil == 'socio'" class="nav-item active">
-            <a class="btn btn-success mx-2" [routerLink]="['gestion-novedad']" routerLinkActive="active" >Novedades</a>
+            <a class="btn btn-success mx-2 text-white" [routerLink]="['gestion-novedad']" routerLinkActive="active" >Novedades</a>
           </li>
           <!-- DROPDOWN GESTION -->
           <li *ngIf="_servLogin.usuarioLogeado.perfil == 'administrador' || _servLogin.usuarioLogeado.perfil == 'administrativo'" class="nav-item dropdown">
-            <a class="dropdown-toggle btn btn-success mx-2" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="dropdown-toggle btn btn-success mx-2 text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Gestion
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a *ngIf="_servLogin.usuarioLogeado.perfil == 'administrador'" class="btn btn-success dropdown-item" [routerLink]="['gestion-usuario']" routerLinkActive="active" >Usuarios</a>
-              <a class="btn btn-success dropdown-item" [routerLink]="['gestion-pago']" routerLinkActive="active" >Pagos</a>
-              <a class="btn btn-success dropdown-item" [routerLink]="['gestion-novedad']" routerLinkActive="active" >Novedades</a>
-              <a class="btn btn-success dropdown-item" [routerLink]="['gestion-servicio']" routerLinkActive="active" >Servicios</a>
-              <a class="btn btn-success dropdown-item" [routerLink]="['gestion-afiliado']" routerLinkActive="active" >Afiliados</a>
-              <a *ngIf="_servLogin.usuarioLogeado.perfil == 'administrativo'" class="btn btn-success dropdown-item" [routerLink]="['gestion-noticia']" routerLinkActive="active" >Noticias</a>
+            <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+              <a *ngIf="_servLogin.usuarioLogeado.perfil == 'administrador'" class="btn btn-success dropdown-item text-white" [routerLink]="['gestion-usuario']" routerLinkActive="active" >Usuarios</a>
+              <a class="btn btn-success dropdown-item text-white" [routerLink]="['gestion-pago']" routerLinkActive="active" >Pagos</a>
+              <a class="btn btn-success dropdown-item text-white" [routerLink]="['gestion-novedad']" routerLinkActive="active" >Novedades</a>
+              <a class="btn btn-success dropdown-item text-white" [routerLink]="['gestion-servicio']" routerLinkActive="active" >Servicios</a>
+              <a class="btn btn-success dropdown-item text-white" [routerLink]="['gestion-afiliado']" routerLinkActive="active" >Afiliados</a>
+              <a *ngIf="_servLogin.usuarioLogeado.perfil == 'administrativo'" class="btn btn-success dropdown-item text-white" [routerLink]="['gestion-noticia']" routerLinkActive="active" >Noticias</a>
             </div>
           </li>
           <!-- SIGN IN -->
           <li *ngIf="!_servLogin.isUsuarioLogeado" class="nav-item active">
-            <a class="btn btn-outline-dark mx-2" [routerLink]="['login']" routerLinkActive="active" >Sign in</a>
+            <a class="btn btn-outline-dark mx-2 text-white" [routerLink]="['login']" routerLinkActive="active" >Sign in</a>
           </li>
           <!-- DROPDOWN USUARIO LOGEADO -->
           <li *ngIf="_servLogin.isUsuarioLogeado" class="nav-item active">
             <div class="nav-item dropdown">
-              <a class="dropdown-toggle btn btn-success mx-2" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="dropdown-toggle btn btn-success mx-2 text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{_servLogin.usuarioLogeado.usuario}}
               </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Cambiar Contraseña</a>
+              <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item text-white btn btn-success" href="#">Cambiar Contraseña</a>
                 <div class="dropdown-divider"></div>
-                <a class="btn mx-2" (click)="logout()" ><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+                <a class="btn mx-2 text-white" (click)="logout()" ><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
               </div>
             </div>
           </li>
           <!-- IMAGEN USUARIO SOCIO-AFILIADO -->
-          <li *ngIf="_servLogin.isUsuarioLogeado" class="nav-item active">
+          <li *ngIf="_servLogin.isUsuarioLogeado.perfil == 'socio'" class="nav-item active">
             <img src="{{_servLogin.afiliadoLogeado.imagen}}" width="50px" height="50px">
           </li>
 
