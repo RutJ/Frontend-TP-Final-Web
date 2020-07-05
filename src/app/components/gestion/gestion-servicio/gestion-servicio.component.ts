@@ -3,6 +3,10 @@ import { ServicioService } from 'src/app/service/servicio.service';
 import { Servicio } from 'src/app/models/servicio';
 import { LoginService } from 'src/app/service/login.service';
 import { ToastrService } from 'ngx-toastr';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { Afiliado } from 'src/app/models/afiliado';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-gestion-servicio',
@@ -104,6 +108,136 @@ export class GestionServicioComponent implements OnInit {
     }
 
   }
+
+  /*GENERAR PDF*/
+  generatePdf(action = 'open') {
+    const documentDefinition = this.getDocumentDefinition();
+    switch (action) {
+      case 'open': pdfMake.createPdf(documentDefinition).open(); break;
+      case 'print': pdfMake.createPdf(documentDefinition).print(); break;
+      case 'download': pdfMake.createPdf(documentDefinition).download(); break;
+      default: pdfMake.createPdf(documentDefinition).open(); break;
+    }
+  }
+  /*CONTENIDO DEL PDF */
+  getDocumentDefinition() {
+    return {
+      footer: {
+        columns: [
+          { text: 'EMPRESA: OSFI - EMAIL: obrasocialnsqp@gmail.com - TEL: 0388-154201337', alignment: 'center', color: 'gray' }
+        ]
+      },
+      content: [
+        {
+          text: 'SERVICIOS',
+          bold: true,
+          fontSize: 20,
+          alignment: 'center',
+          margin: [0, 0, 0, 20]
+        },
+        {
+          text: 'Cantidad de servicios: ' + this.listaServicios.length,
+          bold: true,
+          fontSize: 10,
+          alignment: 'left',
+          margin: [10, 10, 10, 10]
+        },
+        this.getServiceObject(this.listaServicios), 
+      ]
+    }
+  }
+
+  /*LISTA DE SERVICIOS */
+  getServiceObject(listaServicios: Array<Servicio>) {
+    const serv = [];
+    listaServicios.forEach(servicio => {
+      serv.push(
+        [{
+          columns: [[
+            [
+              this.getProfilePicObject(servicio),
+            ],
+            [{
+              text: 'Nombre: '+servicio.nombre,
+              style: 'jobTitle',
+              alignment: 'left',
+            },
+            {
+              text: 'Descripcion: '+servicio.descripcion,
+              alignment: 'left',
+            },
+            {
+              text: 'Activo?: '+ servicio.activo,
+              alignment: 'left',
+            },
+            {
+              text: 'Cantidad de inscriptos: '+ servicio.afiliadosInsc.length,
+              alignment: 'left',
+            },
+            {
+              text: 'Lista de inscriptos: ',
+              alignment: 'center',
+              bold: true,
+            },
+           
+          ],
+          this.getAfiliadoObject(servicio.afiliadosInsc),
+        ],
+        ],
+      }]
+    );
+  });
+    return {
+      table: {
+        widths: ['*'],
+        body: [
+          ...serv
+        ]
+      }
+    };
+  }
+  /*IMAGEN DEL SERVICIO DEL PDF */
+  getProfilePicObject(servicio: Servicio) {
+    if (servicio.imagen) {
+      return {
+        image: servicio.imagen ,
+        width: 75,
+        alignment : 'center'
+      };
+    }
+    return null;
+  }
+  /*TABLA DE AFILIADOS DE UN SERVICIO */
+  getAfiliadoObject(afiliados: Array<Afiliado>) {
+    return {
+
+      table: {
+         headerRows: 1,
+        widths: ['*', '*', '*', '*'],
+        body: [
+          [
+          {
+             text: 'NOMBRE', bold: true
+          },
+          {
+            text: 'APELLIDO', bold: true 
+          },
+          {
+            text: 'DNI', bold: true 
+          },
+          {
+            text: 'EMAIL', bold: true 
+          },
+          ],
+          ...afiliados.map(afi => {
+            return [afi.nombres, afi.apellido, afi.dni, afi.email];
+          })
+        ]
+      }
+    };
+  }
+
+ 
 
   ngOnInit(): void {
   }

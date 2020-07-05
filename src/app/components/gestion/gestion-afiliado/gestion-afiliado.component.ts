@@ -5,6 +5,10 @@ import { LoginService } from '../../../service/login.service';
 import { UsuarioService } from 'src/app/service/usuario.service';
 import { Usuario } from 'src/app/models/usuario';
 import { ToastrService } from 'ngx-toastr';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { kMaxLength } from 'buffer';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-gestion-afiliado',
@@ -174,8 +178,8 @@ export class GestionAfiliadoComponent implements OnInit {
     this.validarNombreUsuario();
   }
 
-   /*validar las imagenes*/
-   public validarImagenCambiada(files) {
+  /*validar las imagenes*/
+  public validarImagenCambiada(files) {
     if (files[0] != null) {
       this.validarImagen = true;
       this.afiliado.imagen = files[0].base64;
@@ -183,6 +187,101 @@ export class GestionAfiliadoComponent implements OnInit {
       this.validarImagen = false;
     }
   }
+
+  /*GENERAR PDF*/
+  generatePdf(action = 'open') {
+    const documentDefinition = this.getDocumentDefinition();
+    switch (action) {
+      case 'open': pdfMake.createPdf(documentDefinition).open(); break;
+      case 'print': pdfMake.createPdf(documentDefinition).print(); break;
+      case 'download': pdfMake.createPdf(documentDefinition).download(); break;
+      default: pdfMake.createPdf(documentDefinition).open(); break;
+    }
+  }
+  /*CONTENIDO DEL PDF */
+  getDocumentDefinition() {
+    return {
+      footer: {
+        columns: [
+          { text: 'EMPRESA: OSFI - EMAIL: obrasocialnsqp@gmail.com - TEL: 0388-154201337', alignment: 'center', color: 'gray' }
+        ]
+      },
+      content: [
+        {
+          text: 'AFILIADOS',
+          bold: true,
+          fontSize: 20,
+          alignment: 'center',
+          margin: [0, 0, 0, 20],
+          
+        },
+        {
+          text: 'Cantidad total de afiliados : '+ this.listaAfiliados.length,
+          style: 'jobTitle',
+          alignment: 'left',
+          bold: true,
+        },
+        {
+          text: 'LISTA DE AFILIADOS',
+          bold: true,
+          fontSize: 13,
+          alignment: 'center',
+          margin: [0, 0, 0, 20]
+        },
+        this.getAfiliadoObject(),
+      ]
+    }
+  }
+
+  /*TABLA DE AFILIADOS DE UN SERVICIO */
+  getAfiliadoObject() {
+    return {
+      table: {
+         headerRows: 1,
+        widths: [50,80 , 120 , 165,50],
+        body: [
+          [
+          {
+             text: 'NOMBRE', bold: true,
+             alignment: 'center',
+          },
+          {
+            text: 'APELLIDO', bold: true,
+            alignment: 'center',
+          },
+          {
+            text: 'DNI', bold: true,
+            alignment: 'center', 
+          },
+          {
+            text: 'EMAIL', bold: true,
+            alignment: 'center',
+          },
+          {
+            text: 'IMAGEN', bold: true,
+            alignment: 'center',
+          },
+          ],
+          ...this.listaAfiliados.map(afi => {
+            return [afi.nombres, afi.apellido, afi.dni, afi.email,this.getProfilePicObject(afi)];
+          })
+        ]
+      }
+    };
+  }
+
+
+ /*IMAGEN DEL SERVICIO DEL PDF */
+ getProfilePicObject(afiliado: Afiliado ) {
+  if (afiliado.imagen) {
+    return {
+      image: afiliado.imagen ,
+      width: 20,
+      alignment : 'center'
+    };
+  }
+  return null;
+}
 
   ngOnInit(): void {
   }

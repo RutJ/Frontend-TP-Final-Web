@@ -64,8 +64,29 @@
                     </div>
                 </form>
             </div>
-            <!----------------- TABLA DE SERVICIOS ----------------->
 
+            <!------------------------------- GENERAR PDF ----------------------------------------------->
+            <div class="col-12 text-center">
+                <div class=" row text-center">
+                    <button (click)="generatePdf('open')"
+                        class="btn btn-dark align-items-center justify-content-center COL">
+                        <i class="fas fa-folder-open"></i>
+                        <span>Open PDF</span>
+                    </button>
+                    <button (click)="generatePdf('download')"
+                        class="btn btn-dark align-items-center justify-content-center">
+                        <i class="fas fa-cloud-download-alt"></i>
+                        <span>Download PDF</span>
+                    </button>
+                    <button (click)="generatePdf('print')"
+                        class="btn btn-dark align-items-center justify-content-center">
+                        <i class="fas fa-print"></i>
+                        <span>Print PDF</span>
+                    </button>
+                </div>
+            </div>
+
+            <!----------------- TABLA DE SERVICIOS ----------------->
 
             <div class="col-md-8 offset-md-2">
                 <div *ngFor="let servicio of listaServicios">

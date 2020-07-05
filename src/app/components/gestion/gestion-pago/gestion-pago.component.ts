@@ -4,6 +4,11 @@ import { LoginService } from 'src/app/service/login.service';
 import { Pago } from 'src/app/models/pago';
 import { Afiliado } from 'src/app/models/afiliado';
 import { ToastrService } from 'ngx-toastr';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-gestion-pago',
@@ -17,12 +22,16 @@ export class GestionPagoComponent implements OnInit {
   pagos: Array<Pago>;
   showModPago: boolean = false;
   mostrar:boolean=false;
+  monto:number=0;
+  
 
   constructor(private _servPago:PagoService, public _servLogin:LoginService,private _toastr:ToastrService) { 
     this.afiliado = new Afiliado();
     this.pago = new Pago();
     this.pagos = new Array<Pago>();
+    //this.pagos = JSON.parse(sessionStorage.getItem('pagos')) || new Array<Pago>();
     this.getPagos();
+    
   }
 
    /*Obtener pagos*/
@@ -133,6 +142,84 @@ export class GestionPagoComponent implements OnInit {
     this.eMail="";
   }
 
+  /*GENERAR PDF*/
+  generatePdf(action = 'open') {
+    const documentDefinition = this.getDocumentDefinition();
+    switch (action) {
+      case 'open': pdfMake.createPdf(documentDefinition).open(); break;
+      case 'print': pdfMake.createPdf(documentDefinition).print(); break;
+      case 'download': pdfMake.createPdf(documentDefinition).download(); break;
+      default: pdfMake.createPdf(documentDefinition).open(); break;
+    }
+  }
+/*CONTENIDO DEL PDF*/
+  getDocumentDefinition() {
+    this.obtenertotal();
+    //sessionStorage.setItem('pagos', JSON.stringify(this.pagos));
+    return {
+      
+      footer: {
+        columns: [
+          { text: 'EMPRESA: OSFI - EMAIL: obrasocialnsqp@gmail.com - TEL: 0388-154201337', alignment: 'center', color: 'gray' }
+        ]
+      },
+      content: [
+        {
+          text: 'Reporte pagos',
+          bold: true,
+          fontSize: 20,
+          alignment: 'center',
+          margin: [5, 2, 10, 10]
+        },
+        {
+          text: 'TABLA',
+          style: 'header',
+          margin: [5, 5, 5, 5],
+          alignment: 'center',
+        },
+        {
+          layout: 'lightHorizontalLines', // optional
+          table: {
+            headerRows: 1,
+            widths: [ '*', 'auto', 100, '*' ],
+    
+            body: [
+              [ { text: 'Email Afiliado', bold: true }, { text: 'MONTO $', bold: true }, { text: 'AÑO', bold: true }, { text: 'MES', bold: true } ],
+              [ {
+                ul : [
+                  ...this.pagos.filter((value, index) => index % 1 === 0).map(s => s.afiliado.email)
+                ]
+              },{
+                ul : [
+                  ...this.pagos.filter((value, index) => index % 1 === 0).map(s => s.monto)
+                ]
+              }, {
+                ul : [
+                  ...this.pagos.filter((value, index) => index % 1 === 0).map(s => s.anio)
+                ]
+              }, {
+                ul : [
+                  ...this.pagos.filter((value, index) => index % 1 === 0).map(s => s.mes)
+                ]
+              } ],
+              [ { text: 'TOTAL', bold: true }, this.monto +'$', '-', '-' ]
+            ]
+          }
+        },
+
+        { qr: new Date+ ', Numero Contacto : ' + '0388-154201337', fit : 100 ,margin: [15, 15, 15, 15],},
+      ]
+    }
+  }
+  
+
+  obtenertotal(){
+    this.monto=0;
+    for (let i = 0; i < this.pagos.length; i++) {
+      const element = this.pagos[i];
+      this.monto=this.monto+element.monto
+    }
+  }
 
 
 }
