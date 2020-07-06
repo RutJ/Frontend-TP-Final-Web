@@ -67,32 +67,11 @@
                   </div>
                 </form>
             </div>
-            <!------------------------------- GENERAR PDF ----------------------------------------------->
-            <div class="col-12 text-center">
-                <div class=" row text-center">
-                    <button (click)="generatePdf('open')"
-                        class="btn btn-dark align-items-center justify-content-center COL">
-                        <i class="fas fa-folder-open"></i>
-                        <span>Open PDF</span>
-                    </button>
-                    <button (click)="generatePdf('download')"
-                        class="btn btn-dark align-items-center justify-content-center">
-                        <i class="fas fa-cloud-download-alt"></i>
-                        <span>Download PDF</span>
-                    </button>
-                    <button (click)="generatePdf('print')"
-                        class="btn btn-dark align-items-center justify-content-center">
-                        <i class="fas fa-print"></i>
-                        <span>Print PDF</span>
-                    </button>
-                </div>
-            </div>
-        
             
             <!------------------------------- TABLA DE PAGOS ----------------------------------------------->
 
             <div class="col-12 table-responsive">
-                <table class="table table-striped text-center" [mfData]="pagos" #mf="mfDataTable"
+                <table class="table table-striped text-center text-white" [mfData]="pagos" #mf="mfDataTable"
                 [mfRowsOnPage]="5">
                     <thead>
                         <tr>
@@ -136,6 +115,28 @@
                         </tr>
                     </tfoot>
                 </table>
+            </div>
+
+            <!------------------------------- GENERAR PDF ----------------------------------------------->
+            
+            <div class="col-12 text-center">
+                <div class="row text-center">
+                    <button (click)="generatePdf('open')"
+                        class="btn btn-dark align-items-center justify-content-center mx-md-4 mx-sm1 bg-white" style="width: 175px; margin-bottom: 10px;">
+                        <i class="fas fa-folder-open" style="color: black;"></i>
+                        <span class="mx-1" style="color: black;">Previsualizar PDF</span>
+                    </button>
+                    <button (click)="generatePdf('download')"
+                        class="btn btn-dark align-items-center justify-content-center mx-md-4 mx-sm-1 bg-white" style="width: 168px; margin-bottom: 10px;">
+                        <i class="fas fa-cloud-download-alt" style="color: black;"></i>
+                        <span class="mx-1" style="color: black;">Descargar PDF</span>
+                    </button>
+                    <button (click)="generatePdf('print')"
+                        class="btn btn-dark align-items-center justify-content-center mx-md-4 mx-sm-1 bg-white" style="width: 130px; margin-bottom: 10px;">
+                        <i class="fas fa-print" style="color: black;"></i>
+                        <span class="mx-1" style="color: black;">Imprimir</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>

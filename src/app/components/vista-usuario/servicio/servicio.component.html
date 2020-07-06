@@ -3,7 +3,7 @@
         <div class="row">
             <h1>Mis servicios</h1>
             <div *ngFor="let visitado of listaServiciosVisitados" class="col-md-8 offset-md-2">
-                <div class="card">
+                <div class="card dark bg-dark">
                     <img src="{{visitado.imagen}}" class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title">{{visitado.nombre}}</h5>
@@ -14,7 +14,7 @@
             </div>
             <h1>Servicios Disponibles</h1>
             <div *ngFor="let noVisitado of listaServiciosNoVisitados" class="col-md-8 offset-md-2">
-                <div class="card">
+                <div class="card dark bg-dark border-white">
                     <img src="{{noVisitado.imagen}}" class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title">{{noVisitado.nombre}}</h5>

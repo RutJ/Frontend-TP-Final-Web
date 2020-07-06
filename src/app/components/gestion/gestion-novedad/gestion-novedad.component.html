@@ -6,8 +6,8 @@
             <div class="col-md-6 offset-md-3">
                 <div class="col-md-12">
                     <!---------------- FORMULARIO ------------------>
-                    <form class="card" #formNovedad="ngForm">
-                        <h3 class="row card-header">Nueva Novedad</h3>
+                    <form class="card bg-dark dark border-white" #formNovedad="ngForm">
+                        <h3 class="row card-header mx-1">Nueva Novedad</h3>
                         <div class="mb-4 card-body">
                             <div class="form-group">
                                 <label for="titulo">Asunto</label>
@@ -55,7 +55,7 @@
         <div class="row">
             <!----------TABLA------------>
             <h3 class="card-header col-12 text-center">Novedades pendientes</h3>
-            <table class="table table-striped text-center" [mfData]="novedades" #mf="mfDataTable"
+            <table class="table table-striped text-center text-white" [mfData]="novedades" #mf="mfDataTable"
             [mfRowsOnPage]="5">
                 <thead>
                     <tr>
@@ -99,7 +99,7 @@
             <div  class="col mb-4 col-md-7 offset-md-3">
                 <!-------------CARDS DE NOVEDADES-------------->
                 <div *ngFor="let item of novedades">
-                    <div class="card text-center">
+                    <div class="card text-center dark bg-dark border-white">
                         <div class="row card-header">
                             Usuario: {{item.usuario.usuario}}
                         </div>
