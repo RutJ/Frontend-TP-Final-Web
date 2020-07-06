@@ -27,7 +27,10 @@
     background: rgb(30, 30, 30);
 }
 .my-bg-dark-2{
-    background: rgb(70, 70, 70);
+    background: rgb(40, 40, 40);
+}
+.my-bg-dark-3{
+    background: rgb(60, 60, 60);
 }
 .my-bg-green{
     background: #4DC26B;
@@ -35,4 +38,7 @@
 /*color text*/
 .my-text-color{
     color: #4DC26B;
+}
+span{
+    color:#4DC26B;
 }

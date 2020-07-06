@@ -1,24 +1,23 @@
-<div *ngIf="_servLogin.usuarioLogeado.perfil == 'administrador'">
-    <!--  -->
+<div > <!-- *ngIf="_servLogin.usuarioLogeado.perfil == 'administrador'" -->
     <div class="container">
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
+        <div class="row py-5">
+            <div class="col-md-6 offset-md-3 my-3 p-0 my-bg-dark-2">
 
 
                 <!--------------- FORMULARIO DE REGISTRO DE USUARIO --------------->
 
 
-                <h1 class="text-center">Crear usuario</h1>
-                <form #formCrearUsuario="ngForm">
+                <p class="my-title p-2 my-bg-dark-1"><span>Nuevo</span> Usuario</p>
+                <form #formCrearUsuario="ngForm" class="px-5 py-3 my-text-sm">
                     <div class="form-group row">
-                        <label for="usuario">Nombre de usuario</label>
+                        <label for="usuario">E-Mail</label>
                         <input type="text" name="usuario" id="usuario" class="form-control"
                             [(ngModel)]="usuario.usuario" required #usuarioV="ngModel"
                             (change)="validarNombreUsuario()">
                         <!-- Validacion -->
                         <div *ngIf="usuarioV.invalid && (usuarioV.dirty || usuarioV.touched)">
                             <div *ngIf="usuarioV.errors.required">
-                                <small class="text-danger"><Strong>*Usuario Obligatorio</Strong></small>
+                                <small class="text-danger"><Strong>*E-Mail Obligatorio</Strong></small>
                             </div>
                         </div>
                         <div *ngIf="buscarUsuario">
@@ -55,7 +54,7 @@
                     </div>
 
                     <div class="text-center">
-                        <button *ngIf="!showModificarUsuario" class="btn btn-success w-50" (click)="crearUsuario()"[disabled]="(!formCrearUsuario.form.valid || buscarUsuario)">Crear</button>
+                        <button *ngIf="!showModificarUsuario" class="btn btn-success" (click)="crearUsuario()"[disabled]="(!formCrearUsuario.form.valid || buscarUsuario)"><i class="fas fa-user-plus"></i> Agregar</button>
 
                         <button *ngIf="showModificarUsuario" class="btn btn-danger mx-5"(click)="cancelarModificar()">Cancelar</button>
                         
@@ -69,13 +68,23 @@
             <!----------------- TABLA DE USUARIOS ----------------->
 
 
-            <div class="col-12">
-                <table class="table table-striped text-center" [mfData]="listaUsuarios" #mf="mfDataTable"
+            <div class="col-12 my-3">
+                <p class="my-title p-2 my-bg-dark-1"><span>Usuarios</span> Registrados</p>
+                <div class="my-bg-dark-2 col-12">
+                    <form class="p-1">
+                        <div class="form-group row">
+                            <label for="buscar" class="col-md-12 my-text-md"><span>Filtrar</span> por e-mail</label>
+                            <input type="text" name="buscar" id="buscar" class="form-control col-md-6 offset-md-2" [(ngModel)]="filtrarTabla">
+                            <button class="btn btn-primary col-md-2" (click)="filtrar()"><i class="fas fa-search-plus"></i>  Filtrar</button>
+                        </div>
+                    </form>
+                </div>
+                <table class="table table-striped text-center my-bg-dark-2" [mfData]="listaUsuariosFiltro" #mf="mfDataTable"
                     [mfRowsOnPage]="5">
-                    <thead>
+                    <thead class="text-white">
                         <tr>
                             <th>
-                                <mfDefaultSorter by="usuario">Usuario</mfDefaultSorter>
+                                <mfDefaultSorter by="usuario">E-mail</mfDefaultSorter>
                             </th>
                             <th>
                                 <mfDefaultSorter by="password">Password</mfDefaultSorter>
@@ -91,18 +100,18 @@
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="text-white">
                         <tr *ngFor="let usuario of mf.data">
                             <td>{{usuario.usuario}}</td>
                             <td>{{usuario.password}}</td>
                             <td>{{usuario.activo && 'Si' || 'No'}}</td>
                             <td>{{usuario.perfil}}</td>
-                            <td><button class="btn btn-primary" (click)="mostrarModificar(usuario)">Modificar</button>
+                            <td><button class="btn btn-primary" (click)="mostrarModificar(usuario)"><i class="fas fa-user-edit"></i> Modificar</button>
                             </td>
-                            <td><button class="btn btn-danger" (click)="modificarEstadoUsuario(usuario)">{{usuario.activo && 'Deshabilitar' || 'Habilitar'}}</button></td>
+                            <td><button class="btn btn-danger" (click)="modificarEstadoUsuario(usuario)"><i class="fas fa-user-times"></i> {{usuario.activo && 'Deshabilitar' || 'Habilitar'}}</button></td>
                         </tr>
                     </tbody>
-                    <tfoot>
+                    <tfoot >
                         <tr>
                             <td colspan="4">
                                 <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
@@ -114,4 +123,4 @@
         </div>
     </div>
 </div>
-<div *ngIf="_servLogin.usuarioLogeado.perfil != 'administrador'"><img src="https://media.tenor.com/images/b65504dbb7eeafc34f3ae35c455cf10f/tenor.gif" height="100%" width="100%"></div>
+<!-- <div *ngIf="_servLogin.usuarioLogeado.perfil != 'administrador'"><img src="https://media.tenor.com/images/b65504dbb7eeafc34f3ae35c455cf10f/tenor.gif" height="100%" width="100%"></div> -->

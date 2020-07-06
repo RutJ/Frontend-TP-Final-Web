@@ -1,14 +1,14 @@
-<div *ngIf="_servLogin.usuarioLogeado.perfil == 'administrador' || _servLogin.usuarioLogeado.perfil == 'administrativo'">
+<div > <!-- *ngIf="_servLogin.usuarioLogeado.perfil == 'administrador' || _servLogin.usuarioLogeado.perfil == 'administrativo'" -->
     <div class="container">
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
+        <div class="row py-5">
+            <div class="col-md-8 offset-md-2 my-3 p-0 my-bg-dark-2">
 
 
                 <!--------------- FORMULARIO DE REGISTRO DE SERVICIOS --------------->
 
 
-                <h1 class="text-center">Crear Servicio</h1>
-                <form #formCrearServicio="ngForm">
+                <p class="my-title p-2 my-bg-dark-1"><span>Nuevo</span> Servicio</p>
+                <form #formCrearServicio="ngForm" class="px-5 py-3 my-text-sm">
                     <div class="form-group row">
                         <label for="nombre">Nombre de Servicio</label>
                         <input type="text" name="nombre" id="nombre" class="form-control" [(ngModel)]="servicio.nombre"
@@ -23,7 +23,7 @@
                     <div class="form-group row">
                         <label for="descripcion">Descripcion</label>
                         <textarea name="descripcion" id="descripcion" class="form-control"
-                            [(ngModel)]="servicio.descripcion" required #descripcionV="ngModel"></textarea>
+                            [(ngModel)]="servicio.descripcion" required #descripcionV="ngModel" rows="8"></textarea>
                         <!-- Validacion -->
                         <div *ngIf="descripcionV.invalid && (descripcionV.dirty || descripcionV.touched)">
                             <div *ngIf="descripcionV.errors.required">
@@ -50,23 +50,23 @@
                     </div>
 
                     <div class="text-center">
-                        <button *ngIf="!showModificarServicio" class="btn btn-success w-50"
+                        <button *ngIf="!showModificarServicio" class="btn btn-success"
                             [disabled]="(!formCrearServicio.form.valid) || !validarImagen"
-                            (click)="crearServicio()">Crear</button>
+                            (click)="crearServicio()"><i class="fas fa-plus"></i> Agregar</button>
 
                         <button *ngIf="showModificarServicio" class="btn btn-danger mx-5"
-                            (click)="cancelarModificar()">Cancelar</button>
+                            (click)="cancelarModificar()"><i class="fas fa-times"></i> Cancelar</button>
 
                         <button *ngIf="showModificarServicio" class="btn btn-success mx-5"
                             [disabled]="(!formCrearServicio.form.valid) || !validarImagen"
-                            (click)="modificarServicio()">Modificar</button>
+                            (click)="modificarServicio()"><i class="fas fa-pencil-alt"></i> Modificar</button>
 
                     </div>
                 </form>
             </div>
 
             <!------------------------------- GENERAR PDF ----------------------------------------------->
-            <div class="col-12 text-center">
+            <div class="col-12 text-center my-3">
                 <div class=" row text-center">
                     <button (click)="generatePdf('open')"
                         class="btn btn-dark align-items-center justify-content-center COL">
@@ -88,17 +88,17 @@
 
             <!----------------- TABLA DE SERVICIOS ----------------->
 
-            <div class="col-md-8 offset-md-2">
-                <div *ngFor="let servicio of listaServicios">
-                    <div class="card my-5">
-                        <p class="text-center">Imagen</p>
+            <div class="col-md-12 my-3 my-text-md">
+                <p class="my-title p-2 my-bg-dark-1"><span>Servicios</span> Creados</p>
+                <div *ngFor="let servicio of listaServicios" class="my-bg-dark-2">
+                    <div class="card mb-5 p-3">
                         <img src="{{servicio.imagen}}" class="card-img-top col-md-4 offset-md-4">
                         <div class="card-body">
-                            <h5 class="card-text">Nombre: {{servicio.nombre}}</h5>
-                            <h5 class="card-text">Descripcion: {{servicio.descripcion}}</h5>
-                            <h5 class="card-text">¿Activo?: {{servicio.activo && 'Si' || 'No'}}</h5>
-                            <h5 class="text-center">Lista de afiliados inscriptos</h5>
-                            <table class="table table-striped text-center" [mfData]="servicio.afiliadosInsc" #mf="mfDataTable"
+                            <p class="card-text"><span> Nombre:</span> {{servicio.nombre}}</p>
+                            <p class="card-text"><span> Descripcion:</span> {{servicio.descripcion}}</p>
+                            <p class="card-text"><span> ¿Activo?:</span> {{servicio.activo && 'Si' || 'No'}}</p>
+                            <p class="p-2 my-bg-dark-1"><span>Afiliados</span> Inscriptos</p>
+                            <table class="table table-striped text-center text-white" [mfData]="servicio.afiliadosInsc" #mf="mfDataTable"
                                 [mfRowsOnPage]="5">
                                 <thead>
                                     <tr>
@@ -132,8 +132,8 @@
                                     </tr>
                                 </tfoot>
                             </table>
-                            <button class="btn btn-primary"(click)="mostrarModificar(servicio)">Modificar</button>
-                            <button class="btn btn-danger"(click)="modificarEstadoServicio(servicio)">{{servicio.activo && 'Desactivar' || 'Activar'}}</button>
+                            <button class="btn btn-primary mx-2"(click)="mostrarModificar(servicio)"><i class="fas fa-pencil-alt"></i> Modificar</button>
+                            <button class="btn btn-danger mx-2"(click)="modificarEstadoServicio(servicio)"><i class="fas fa-times"></i> {{servicio.activo && 'Desactivar' || 'Activar'}}</button>
                         </div>
                     </div>
                 </div>
@@ -141,4 +141,4 @@
         </div>
     </div>
 </div>
-<div *ngIf="_servLogin.usuarioLogeado.perfil != 'administrador' && _servLogin.usuarioLogeado.perfil != 'administrativo'"><img src="https://media.tenor.com/images/b65504dbb7eeafc34f3ae35c455cf10f/tenor.gif" height="100%" width="100%"></div>
+<!-- <div *ngIf="_servLogin.usuarioLogeado.perfil != 'administrador' && _servLogin.usuarioLogeado.perfil != 'administrativo'"><img src="https://media.tenor.com/images/b65504dbb7eeafc34f3ae35c455cf10f/tenor.gif" height="100%" width="100%"></div> -->

@@ -12,9 +12,11 @@ import { ToastrService } from 'ngx-toastr';
 export class GestionUsuarioComponent implements OnInit {
 
   listaUsuarios: Array<Usuario>;
+  listaUsuariosFiltro: Array<Usuario>;
   usuario: Usuario;
   buscarUsuario: boolean = false;
   showModificarUsuario: boolean = false;
+  filtrarTabla:string="";
   constructor(
     private _servUsuario: UsuarioService,
     public _servLogin: LoginService,
@@ -22,6 +24,7 @@ export class GestionUsuarioComponent implements OnInit {
   ) {
 
     this.listaUsuarios = new Array<Usuario>();
+    this.listaUsuariosFiltro = new Array<Usuario>();
     this.usuario = new Usuario();
     this.getUsuarios();
   }
@@ -87,6 +90,7 @@ export class GestionUsuarioComponent implements OnInit {
         result.forEach(element => {
           Object.assign(this.usuario, element);
           this.listaUsuarios.push(this.usuario);
+          this.listaUsuariosFiltro.push(this.usuario);
           this.usuario = new Usuario();
         });
       },
@@ -110,6 +114,10 @@ export class GestionUsuarioComponent implements OnInit {
         console.log(error);
       }
     )
+  }
+  /*filtrar tabla*/
+  public filtrar(){
+    this.listaUsuariosFiltro = this.listaUsuarios.filter(element => element.usuario.toLowerCase().indexOf(this.filtrarTabla) > -1);
   }
 
   ngOnInit(): void {

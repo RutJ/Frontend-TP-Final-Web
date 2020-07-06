@@ -1,13 +1,13 @@
-<div *ngIf="_servLogin.usuarioLogeado.perfil == 'administrativo'">
+<div > <!-- *ngIf="_servLogin.usuarioLogeado.perfil == 'administrativo'" -->
     <div class="container">
-        <div class="row">
+        <div class="row py-5">
 
-            <div class="col-md-6 offset-md-3">
+            <div class="col-md-8 offset-md-2 my-3 p-0 my-bg-dark-2">
                 <!--------------- FORMULARIO DE REGISTRO DE NOTICIAS --------------->
 
 
-                <h1 class="text-center">Crear noticia</h1>
-                <form #formCrearNoticia="ngForm">
+                <p class="my-title p-2 my-bg-dark-1"><span>Redactar</span> Noticia</p>
+                <form #formCrearNoticia="ngForm" class="px-5 py-3 my-text-sm">
                     <div class="form-group row">
                         <label for="titulo">Titulo</label>
                         <input type="text" name="titulo" id="titulo" class="form-control" [(ngModel)]="noticia.titulo"
@@ -23,7 +23,7 @@
                     <div class="form-group row">
                         <label for="descripcion">Descripcion</label>
                         <textarea type="text" name="descripcion" id="descripcion" class="form-control"
-                            [(ngModel)]="noticia.descripcion" required #descripcionV="ngModel" cols="10" rows="5"></textarea>
+                            [(ngModel)]="noticia.descripcion" required #descripcionV="ngModel" rows="8"></textarea>
                         <!-- Validacion -->
                         <div *ngIf="descripcionV.invalid && (descripcionV.dirty || descripcionV.touched)">
                             <div *ngIf="descripcionV.errors.required">
@@ -51,11 +51,11 @@
                     </div>
 
                     <div class="text-center">
-                        <button *ngIf="!showModificarNoticia" class="btn btn-success w-50" [disabled]="(!formCrearNoticia.form.valid) || !validarImagen " (click)="crearNoticia()">Crear</button>
+                        <button *ngIf="!showModificarNoticia" class="btn btn-success w-50" [disabled]="(!formCrearNoticia.form.valid) || !validarImagen " (click)="crearNoticia()"><i class="fas fa-plus"></i> Agregar</button>
 
-                        <button *ngIf="showModificarNoticia" class="btn btn-danger mx-5" (click)="cancelarModificar()">Cancelar</button>
+                        <button *ngIf="showModificarNoticia" class="btn btn-danger mx-5" (click)="cancelarModificar()"><i class="fas fa-times"></i> Cancelar</button>
 
-                        <button *ngIf="showModificarNoticia" class="btn btn-success mx-5" [disabled]="(!formCrearNoticia.form.valid) || !validarImagen " (click)="modificarNoticia()">Modificar</button>
+                        <button *ngIf="showModificarNoticia" class="btn btn-success mx-5" [disabled]="(!formCrearNoticia.form.valid) || !validarImagen " (click)="modificarNoticia()"><i class="fas fa-pencil-alt"></i> Modificar</button>
 
                     </div>
                 </form>
@@ -66,59 +66,26 @@
             <!----------------- TABLA DE NOTICA ----------------->
 
 
-            <div class="col-12">
-                <table class="table table-striped text-center" [mfData]="listaNoticias" #mf="mfDataTable"
-                    [mfRowsOnPage]="5">
-                    <thead>
-                        <tr>
-                            <th>
-                                <mfDefaultSorter by="titulo">Titulo</mfDefaultSorter>
-                            </th>
-                            <th>
-                                <mfDefaultSorter by="descripcion">Descripcion</mfDefaultSorter>
-                            </th>
-                            <th>
-                                <mfDefaultSorter by="fecha">Fecha</mfDefaultSorter>
-                            </th>
-                            <th>
-                                <mfDefaultSorter by="usuario">Usuario</mfDefaultSorter>
-                            </th>
-                            <th>
-                                Vigente
-                            </th>
-                            <th>
-                                Imagen
-                            </th>
-                            <th colspan="2">
-                                Acciones
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let noticia of mf.data">
-                            <td>{{noticia.titulo}}</td>
-                            <td>{{noticia.descripcion}}</td>
-                            <td>{{noticia.fecha | date: 'dd/MM/yyyy'}}</td>
-                            <td>{{noticia.usuario.usuario}}</td>
-                            <td>{{noticia.vigente && 'Si' || 'No'}}</td>
-                            <td><img src="{{noticia.imagen}}" width="50px" height="50px"></td>
-                            <td><button class="btn btn-primary" (click)="mostrarModificar(noticia)">Modificar</button>
-                            </td>
-                            <td><button class="btn btn-danger" (click)="modificarEstadoNoticia(noticia)">{{noticia.vigente && 'Desactivar' || 'Activar'}}</button></td>
-                            <td><button class="btn btn-info" (click)="realizarPosteo(noticia)">Publicar</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="4">
-                                <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
-                            </td>
-                        </tr>
-                    </tfoot>
-                </table>
+            <div class="col-md-12 my-3 my-text-md">
+                <p class="my-title p-2 my-bg-dark-1"><span>Noticias</span> Redactadas</p>
+                <div *ngFor="let noticia of listaNoticias" class="my-bg-dark-2">
+                    <div class="card mb-5 p-3">
+                        <img src="{{noticia.imagen}}" class="card-img-top col-md-4 offset-md-4">
+                        <div class="card-body">
+                            <p class="card-text"><span>Titulo:</span> {{noticia.titulo}}</p>
+                            <p class="card-text"><span>Descripcion:</span> {{noticia.descripcion}}</p>
+                            <p class="card-text"><span>¿Vigente?:</span> {{noticia.vigente && 'Si' || 'No'}}</p>
+                            <p class="card-text"><span>Fecha:</span> {{noticia.fecha | date: 'dd/MM/yyyy'}}</p>
+                            <p class="card-text"><span>Creador:</span> {{noticia.usuario.usuario}}</p>
+                            <button class="btn btn-info mx-2" (click)="mostrarModificar(noticia)"><i class="fas fa-pencil-alt"></i>  Modificar</button>
+                            <button class="btn btn-danger mx-2" (click)="modificarEstadoNoticia(noticia)"><i class="fas fa-times"></i> {{noticia.vigente && 'Desactivar' || 'Activar'}}</button>
+                            <button class="btn mx-2 text-white" (click)="realizarPosteo(noticia)" style="background:#3b5998;"><i class="fab fa-facebook-f"></i> Publicar en Facebook</button>
+                        </div>
+                        
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-<div *ngIf="_servLogin.usuarioLogeado.perfil != 'administrativo'"><img src="https://media.tenor.com/images/b65504dbb7eeafc34f3ae35c455cf10f/tenor.gif" height="100%" width="100%"></div>
+<!-- <div *ngIf="_servLogin.usuarioLogeado.perfil != 'administrativo'"><img src="https://media.tenor.com/images/b65504dbb7eeafc34f3ae35c455cf10f/tenor.gif" height="100%" width="100%"></div> -->
