@@ -1,28 +1,60 @@
-<div *ngIf="_servLogin.usuarioLogeado.perfil == 'administrador' || _servLogin.usuarioLogeado.perfil == 'administrativo' || _servLogin.usuarioLogeado.perfil == 'socio'">
+<div>
+    <!-- *ngIf="_servLogin.isUsuarioLogeado" -->
     <div class="container">
-        <div class="row">
-            <h1>Mis servicios</h1>
-            <div *ngFor="let visitado of listaServiciosVisitados" class="col-md-8 offset-md-2">
-                <div class="card dark bg-dark">
-                    <img src="{{visitado.imagen}}" class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title">{{visitado.nombre}}</h5>
-                        <p class="card-text">{{visitado.descripcion}}</p>
-                        <button class="btn btn-danger" (click)="darBaja(visitado)">Dar de Baja</button>
+        <div class="row py-5">
+            <div class="accordion col-md-12" id="accordionExample">
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h2 class="mb-0">
+                            <button class="btn collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <p class="my-text-lg p-2 text-white"><span>Mis</span> Servicios</p>
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div *ngFor="let visitado of listaServiciosVisitados" class="col-md-8 offset-md-2">
+                                <div class="card">
+                                    <img src="{{visitado.imagen}}" class="card-img-top">
+                                    <div class="card-body row">
+                                        <h5 class="card-title col-lg-9 my-text-lg">{{visitado.nombre}}</h5>
+                                        <button class="btn btn-danger col-lg-3" (click)="darBaja(visitado)"><i class="fas fa-times"></i> Dar de Baja</button>
+                                        <div class="h-divider py-1"></div>
+                                        <p class="card-text col-md-12 px-lg-5 py-4 my-text-sm">{{visitado.descripcion}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <h1>Servicios Disponibles</h1>
-            <div *ngFor="let noVisitado of listaServiciosNoVisitados" class="col-md-8 offset-md-2">
-                <div class="card dark bg-dark border-white">
-                    <img src="{{noVisitado.imagen}}" class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title">{{noVisitado.nombre}}</h5>
-                        <p class="card-text">{{noVisitado.descripcion}}</p>
-                        <button class="btn btn-success" (click)="inscribirAfiliado(noVisitado)">Inscribirse</button>
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h2 class="mb-0">
+                            <button class="btn" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">
+                                <p class="my-text-lg text-white "><span>Servicios</span> Disponibles</p>
+                            </button>
+                        </h2>
+                    </div>
+
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                        data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div *ngFor="let noVisitado of listaServiciosNoVisitados" class="col-md-8 offset-md-2">
+                                <div class="card border-white py-5">
+                                    <img src="{{noVisitado.imagen}}" class="card-img-top">
+                                    <div class="card-body row">
+                                        <h5 class="card-title col-lg-9 my-text-lg">{{noVisitado.nombre}}</h5>
+                                        <button class="btn btn-success col-lg-3" (click)="inscribirAfiliado(noVisitado)"><i class="fas fa-plus"></i> Inscribirse</button>
+                                        <div class="h-divider py-1"></div>
+                                        <p class="card-text col-md-12 px-lg-5 py-4 my-text-sm">{{noVisitado.descripcion}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>

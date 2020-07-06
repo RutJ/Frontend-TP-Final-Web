@@ -1,0 +1,13 @@
+.card{
+    background: rgb(40, 40, 40);
+    border:none;
+}
+.card-header{
+    border: 2px solid #4DC26B;
+}
+
+.h-divider{
+    height:1px;
+    width:100%;
+    border-bottom: 1px solid #4DC26B;
+}

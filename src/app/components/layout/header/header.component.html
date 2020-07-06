@@ -7,7 +7,7 @@
             <th rowspan="2"><i class="fas fa-heartbeat" style="font-size:50px; color: #4DC26B;"></i></th>
             <td class="my-title"><span>OS</span>FI</td>
           </tr>
-          <tr><td><p class="my-text-sm">Obra social de la facultad de ingenieria</p></td></tr>
+          <tr><td><p class="my-text-sm"><span>Obra social</span> de la facultad de ingenieria</p></td></tr>
         </table>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,7 +59,7 @@
             </li>
             <!-- SIGN IN -->
             <li *ngIf="!_servLogin.isUsuarioLogeado" class="nav-item active">
-              <a class="btn btn-outline-dark m-2 text-white my-text-sm" [routerLink]="['login']" routerLinkActive="active"><strong>Iniciar Sesión</strong></a>
+              <a class="btn btn-success m-2 text-white my-text-sm" [routerLink]="['login']" routerLinkActive="active"><strong>Iniciar Sesión</strong></a>
             </li>
             <!-- DROPDOWN USUARIO LOGEADO -->
             <li *ngIf="_servLogin.isUsuarioLogeado" class="nav-item active">

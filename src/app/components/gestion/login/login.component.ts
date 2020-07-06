@@ -34,10 +34,10 @@ export class LoginComponent implements OnInit {
               this.validarUsuarioSocio();
               this._router.navigateByUrl(this.returnUrl);
             }else{
-              this.msglogin = "Su cuenta se encuentra inactiva, por favor comunicarse con un administrativo";
+              this.msglogin = "Su cuenta ha sido dada de baja";
             }
           } else {
-            this.msglogin = "Credenciales incorrectas..";
+            this.msglogin = "E-mail o Contraseña incorrectas";
           }
         },
         error => {
