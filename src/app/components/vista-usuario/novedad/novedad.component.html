@@ -1,0 +1,103 @@
+<div *ngIf="_servLogin.usuarioLogeado.perfil == 'socio'">
+    <div class="container">
+        <h1 class="text-center font-italic my-text-lg"><span>Novedades</span></h1>
+        <div class="row">
+            <div class="col-md-9 col-12 offset-md-2 offset-1">
+                <div class="col-md-12">
+                    <!---------------- FORMULARIO ------------------>
+                    <form #formNovedad="ngForm">
+                        <div class="mb-4">
+                            <div class="row">
+                                <div class="form-group col-7">
+                                    <input type="text" placeholder="Ingrese el asunto" name="titulo"
+                                        class="form-control" id="titulo" required [(ngModel)]="novedad.asunto"
+                                        #titulo="ngModel">
+                                </div>
+                                <div *ngIf="titulo.invalid && (titulo.dirty || titulo.touched)" class="col-4">
+                                    <div *ngIf="titulo.errors.required">
+                                        <small class="text-danger">
+                                            <Strong>Debe ingresar un asunto</Strong>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-10">
+                                    <textarea class="form-control" id="textoNovedad" name="novedad"
+                                        placeholder="Escriba su novedad aqui" required [(ngModel)]="novedad.texto"
+                                        #texto="ngModel">
+                                                 </textarea>
+
+                                    <div *ngIf="texto.invalid && (texto.dirty || texto.touched)">
+                                        <div *ngIf="texto.errors.required">
+                                            <small class="text-danger"><Strong>Debe ingresar una
+                                                    novedad</Strong></small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!----------- BOTONES ---------->
+                            <div class="form-group">
+                                <button *ngIf="!novedadMod" class="btn btn-primary" type="submit"
+                                    (click)="enviarNovedad()" [disabled]="formNovedad.invalid"><i class="fa fa-plus"
+                                        aria-hidden="true"></i>
+                                    Enviar</button>
+
+                                <button *ngIf="novedadMod" class="btn btn-success" (click)="modificarNovedad()"
+                                    [disabled]="formNovedad.invalid"><i class="fa fa-plus" aria-hidden="true"></i>
+                                    Modificar</button>
+
+                                <button *ngIf="novedadMod" class="btn btn-danger" (click)="cancelarModificar()"><i
+                                        class="fa fa-times" aria-hidden="true"></i> Cancelar</button>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!----------TABLA------------>
+        <div class="table-responsive">
+            <h1 class="font-italic font-italic my-text-lg">Pendientes</h1>
+            <table class="table table-dark text-center " [mfData]="novedades" #mf="mfDataTable" [mfRowsOnPage]="5">
+                <thead>
+                    <tr>
+                        <th>
+                            <mfDefaultSorter by="asunto">Asunto</mfDefaultSorter>
+                        </th>
+                        <th>
+                            <mfDefaultSorter by="texto">Texto</mfDefaultSorter>
+                        </th>
+                        <th>
+                            <mfDefaultSorter by="usuario">Fecha</mfDefaultSorter>
+                        </th>
+                        <th>
+                            <mfDefaultSorter></mfDefaultSorter>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let novedad of mf.data">
+                        <td *ngIf="novedad.estado=='pendiente'">{{novedad.asunto}}</td>
+                        <td *ngIf="novedad.estado=='pendiente'">{{novedad.texto}}</td>
+                        <td *ngIf="novedad.estado=='pendiente'">{{novedad.fecha | date: 'shortDate'}}
+                        </td>
+                        <td *ngIf="novedad.estado=='pendiente'">
+                            <button id="btnPrevious" class="btn btn-primary"
+                                (click)="mostrarModificar(novedad)">Seleccionar
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4">
+                            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

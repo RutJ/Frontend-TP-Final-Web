@@ -6,7 +6,7 @@ import { GestionUsuarioComponent } from './components/gestion/gestion-usuario/ge
 import { GestionServicioComponent } from './components/gestion/gestion-servicio/gestion-servicio.component';
 import { LoginComponent } from './components/gestion/login/login.component';
 
-
+import { NovedadComponent } from './components/vista-usuario/novedad/novedad.component';
 import { ServicioComponent } from './components/vista-usuario/servicio/servicio.component';
 import { GestionNovedadComponent } from './components/gestion/gestion-novedad/gestion-novedad.component';
 import { GestionPagoComponent } from './components/gestion/gestion-pago/gestion-pago.component';
@@ -21,6 +21,7 @@ const routes: Routes = [
   { path: 'gestion-noticia', component:GestionNoticiaComponent},
   { path: 'gestion-pago', component: GestionPagoComponent},
   { path: 'vista-servicio', component: ServicioComponent},
+  { path: 'vista-novedad', component: NovedadComponent},
   { path: 'login', component: LoginComponent },
   { path: '**', pathMatch:'full',redirectTo:'home' },
   { path: '', pathMatch:'full',redirectTo:'home' },
