@@ -1,16 +1,18 @@
 .form-control{
+    box-shadow: none;
+    transition: border .2s;
     color: honeydew;
     background: rgb(40, 40, 40);
     border: 2px solid #4DC26B;
     font-size: large;
+    transition: border .2s;
 }
 .form-control:focus{
     box-shadow: 0 0 15px green;
+    border: 4px solid #4DC26B;
+    color: #4DC26B;
 }
 
-textarea{
-    height: 300px;
-}
 .btn{
     background: transparent;
     border-style: solid;
@@ -34,4 +36,3 @@ i{
     border-color:aqua;
     color: white;
 }
-

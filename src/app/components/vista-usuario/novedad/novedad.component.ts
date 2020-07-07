@@ -36,10 +36,14 @@ export class NovedadComponent implements OnInit {
   enviarNovedad(){
     this.novedad._id=null;
     this.novedad.estado="pendiente";
+    this.novedad.quitado=false;
     this.novedad.fecha = new Date();
     this.novedadService.addNovedad(this.novedad).subscribe(
       (result) =>{
         this._toastr.success("Novedad enviada","Enviado");
+        this.obtenerNovedades();
+        this.novedad.asunto="";
+        this.novedad.texto="";
       },
       (error) =>{
         this._toastr.error("No se pudo enviar la novedad","Error");

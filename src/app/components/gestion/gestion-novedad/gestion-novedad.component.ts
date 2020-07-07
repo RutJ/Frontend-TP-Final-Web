@@ -48,10 +48,12 @@ export class GestionNovedadComponent implements OnInit {
       (result) =>{
         var novedad: Novedad = new Novedad();
         result.forEach(element => {
-          Object.assign(novedad,element);
-          this.novedades.push(novedad);
-          this.obtenerAfiliadoPorEmail(novedad.usuario.usuario)
-          novedad = new Novedad();
+          if(!element.quitado){
+            Object.assign(novedad,element);
+            this.novedades.push(novedad);
+            this.obtenerAfiliadoPorEmail(novedad.usuario.usuario)
+            novedad = new Novedad();
+          }
         });
       },
       (error) =>{
@@ -73,7 +75,9 @@ export class GestionNovedadComponent implements OnInit {
     )
   }
 
+  
   /**ELIMINAR NOVEDAD */
+  /*
   public eliminarNovedad(novedad: Novedad){
     this.afiliados = new Array<Afiliado>();
     this.novedades = new Array<Novedad>();
@@ -86,6 +90,13 @@ export class GestionNovedadComponent implements OnInit {
         this._toastr.error("No se pudo eliminar el usuario","Error");
       }
     )
+  }
+*/
+  public quitarNovedad(novedad:Novedad){
+    novedad.quitado=true;
+    this.novedad=novedad;
+    this.modificarNovedad();
+    this.obtenerNovedades();
   }
 
 

@@ -7,6 +7,7 @@ export class Novedad {
     texto: string;
     estado: string;
     fecha:Date;
+    quitado:Boolean;
 
     constructor(){}
 }

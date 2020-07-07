@@ -1,34 +1,17 @@
 *{
     background: transparent;
 }
-.label{
-    float: right;
-}
-
-.card, .card div{
-    padding-left: 1px;
-    padding-right: 1px;
-    color: floralwhite;
-}
 
 .card-body{
-    padding-bottom: 10px;
-    padding-top: 10px;
+    padding-bottom: 0px;
+    padding-top: 1px;
     background-color: rgb(14, 22, 22);
 }
-
 
 p{
     hyphens:auto;
     word-wrap:break-word;
-    margin-right: 80px;
-    padding-left: 40px;
-}
-img{
-    width: 70px; height: 70px;
-    border-radius: 5px;
-    margin: 5px 5px 5px 35px;
-    float: left;
+    margin-right: 20px;
 }
 
 .btn-link{
@@ -36,7 +19,9 @@ img{
     border: 2px solid #4DC26B;
     color: white;
 }
-
+.btn-link:focus, .card-body{
+    box-shadow: 0 0 20px cyan;
+}
 .btn-danger{
     box-shadow: 0 0 10px darkred;
     background: transparent;

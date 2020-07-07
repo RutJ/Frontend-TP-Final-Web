@@ -27,6 +27,7 @@ import { GestionPagoComponent } from './components/gestion/gestion-pago/gestion-
 import { GestionNoticiaComponent } from './components/gestion/gestion-noticia/gestion-noticia.component';
 import { NovedadComponent } from './components/vista-usuario/novedad/novedad.component';
 import { PagoComponent } from './components/vista-usuario/pago/pago.component';
+import { PerfilComponent } from './components/vista-usuario/perfil/perfil.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { PagoComponent } from './components/vista-usuario/pago/pago.component';
     GestionNoticiaComponent,
     NovedadComponent,
     PagoComponent,
+    PerfilComponent,
   ],
   imports: [
     BrowserModule,
