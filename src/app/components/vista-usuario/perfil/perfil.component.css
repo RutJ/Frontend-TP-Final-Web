@@ -6,9 +6,6 @@
     background: transparent;
 }
 
-p{
-    margin-right: 0px;
-}
 .card-body{
     padding-bottom: 0px;
     padding-top: 1px;
@@ -16,15 +13,7 @@ p{
    
 }
 
-p{
-    hyphens:auto;
-    word-wrap:break-word;
-    margin-right: 20px; 
-}
-
 #contCard{
-    text-overflow: ellipsis;
-    overflow: hidden;
     min-height: 200px;
 }
 
@@ -33,11 +22,18 @@ p{
     border: 2px solid #4DC26B;
     color: white;
 }
-.btn-link:focus, .card-body{
+.btn-link:focus{
     box-shadow: 0 0 20px cyan;
 }
-.btn-danger{
-    box-shadow: 0 0 10px darkred;
-    background: transparent;
+.btn-outline-primary{
+    box-shadow: 0 0 10px cyan;
+    color:cyan;
+    background:transparent;
+    margin: 20px 40px 20px 20px;
 }
 
+
+.btn-outline-primary:hover{
+    box-shadow: 0 0 15px cyan;
+    color:whitesmoke;
+}

@@ -132,6 +132,7 @@ export class PerfilComponent implements OnInit {
       if(servicioUnico.activo){
         afiliadoAuxiliar = servicioUnico.afiliadosInsc[this.buscarAfiliado(servicioUnico)];
         if(afiliadoAuxiliar != null){
+          servicioUnico.descripcion = servicioUnico.descripcion.substring(0,100) + "...";
           this.listaServiciosVisitados.push(servicioUnico);
         }
       }
