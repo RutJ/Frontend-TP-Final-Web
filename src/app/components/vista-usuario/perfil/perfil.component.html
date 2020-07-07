@@ -1,34 +1,37 @@
-<div class="cuerpo">
+<div *ngIf="_servLogin.usuarioLogeado.perfil == 'socio'" class="cuerpo">
     <div class="container">
         <p class="text-left font-italic my-text-lg"><span>Mi</span> Perfil</p>
         <div class="row">
-            <div class="col-md-3 col-12">
+            <div class="col-md-3 col-7 offset-md-0 offset-3">
                 <img src="{{_servLogin.afiliadoLogeado.imagen}}" width="250" height="250" class="card-img-top d-inline-block align-top">
                 <div class="card">
-                    <p class="card-text"><span>Apellido:<br></span> {{_servLogin.afiliadoLogeado.apellido}}</p>
-                    <p class="card-text"><span>Nombres:<br></span> {{_servLogin.afiliadoLogeado.nombres}}</p>
-                    <p class="card-text"><span>DNI:<br></span> {{_servLogin.afiliadoLogeado.dni}}</p>
-                    <p class="card-text"><span>EMAIL:<br></span> {{_servLogin.afiliadoLogeado.email}}</p>
-                    <p class="card-text"><span>TELEFONO:<br></span> {{_servLogin.afiliadoLogeado.telefono}}</p>       
+                    <p class="card-text"><span>Apellido: </span> {{_servLogin.afiliadoLogeado.apellido}}</p>
+                    <p class="card-text"><span>Nombres:</span> {{_servLogin.afiliadoLogeado.nombres}}</p>
+                    <p class="card-text"><span>DNI:</span> {{_servLogin.afiliadoLogeado.dni}}</p>
+                    <p class="card-text"><span>EMAIL: </span> {{_servLogin.afiliadoLogeado.email}}</p>
+                    <p class="card-text"><span>TELEFONO: </span> {{_servLogin.afiliadoLogeado.telefono}}</p>       
                 </div>
             </div>
-            <div class="col-md-9 col-12">
+            <div class="col-md-8 col-12">
                 <div class="row card">
                     <p class="my-title mr-0 p-2 mb-2 my-bg-dark-1"><span>Servicios</span> Inscriptos</p>
-                    <div class=" offset-md-1 row row-cols-1 row-cols-md-2">
-                        <div class="col mb-4 col-md-5" *ngFor="let item of listaServiciosVisitados;let i = index;">
+                    <div class="row row-cols-1 row-cols-md-2 justify-content-center">
+                        <div class=" col mb-4 col-md-5 col-6" *ngFor="let item of listaServiciosVisitados;let i = index;">
                             <div class="card" *ngIf="i<2">
                                 <img src="{{item.imagen}}" width="250" height="250" class="card-img-top" alt="...">
                                 <div id="contCard" class="card-body">
                                     <p class="card-text"><span>Titulo:<br></span> {{item.nombre}}</p>
-                                    <p class="card-text"><span>Descripcion:<br></span> {{item.descripcion}}</p>
+                                    <p class="card-text"><span>Descripcion:<br></span> {{item.descripcion}} 
+                                        <br><a class="text-primary"  (click)="redirigirServicio()"
+                                        routerLinkActive="active">Ver más</a></p>
+                                    
                              </div>
                             </div>
                         </div> 
                     </div>
                     <div class="text-right">
                         <button class="btn btn-outline-primary"  (click)="redirigirServicio()"
-                            routerLinkActive="active"><strong>Ver Todas</strong></button>
+                            routerLinkActive="active">Ver Todas</button>
                     </div>
                 </div>
                 <div class="row card">
@@ -53,7 +56,7 @@
                     </content>
                     <div class="text-right">
                         <button class="btn btn-outline-primary"  (click)="redirigirPago()"
-                            routerLinkActive="active"><strong>Ver Todas</strong></button>
+                            routerLinkActive="active">Ver Todas</button>
                     </div>
                 </div>
                 <div class="row card">
@@ -87,7 +90,7 @@
                     </div>
                     <div class="text-right">
                         <button class="btn btn-outline-primary"  (click)="redirigirNovedad()"
-                            routerLinkActive="active"><strong>Ver Todas</strong></button>
+                            routerLinkActive="active">Ver Todas</button>
                     </div>
                 </div>
             </div>
