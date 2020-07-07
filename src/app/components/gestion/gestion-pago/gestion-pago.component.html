@@ -1,5 +1,4 @@
-<!--*ngIf="_servLogin.usuarioLogeado.perfil == 'administrador' || _servLogin.usuarioLogeado.perfil == 'administrativo'"-->
-<div >
+<div *ngIf="_servLogin.usuarioLogeado.perfil == 'administrador' || _servLogin.usuarioLogeado.perfil == 'administrativo'">
     <div class="container">
         <div class="row py-5">
             <div class="col-md-6 offset-md-3 my-3 p-0 my-bg-dark-2">
@@ -20,7 +19,7 @@
                     </div>
                     <!--Buscar-->
                     <div class="text-center">
-                        <button class="btn btn-success mx-5" (click)="obtenerAfiliadoPorEmail()"><i class="fa fa-search" aria-hidden="true"></i>Buscar</button>
+                        <button class="btn btn-success mx-5" (click)="obtenerAfiliadoPorEmail()"><i class="fa fa-search" aria-hidden="true"></i><span class="mx-1">Buscar</span></button>
                     </div>
                     <div *ngIf="mostrar" class="form-group row">
                         <label for="monto"> Monto </label>
@@ -60,11 +59,11 @@
 
                     <div class="text-center">
                         <button *ngIf="!showModPago && mostrar" class="btn btn-success w-50" (click)="crearPago()"
-                            [disabled]="formCrearPago.form.invalid"><i class="fa fa-plus" aria-hidden="true"></i>Crear</button>
+                            [disabled]="formCrearPago.form.invalid"><i class="fa fa-plus" aria-hidden="true"></i><span class="mx-1">Crear</span></button>
                         <button *ngIf="showModPago" class="btn btn-danger mx-5"
-                            (click)="cancelarModificar()"><i class="fa fa-ban" aria-hidden="true"></i>Cancelar</button>
+                            (click)="cancelarModificar()"><i class="fa fa-ban" aria-hidden="true"></i><span class="mx-1">Cancelar</span></button>
                         <button *ngIf="showModPago" class="btn btn-success mx-5" (click)="modificarPago()"
-                            [disabled]="formCrearPago.form.invalid"><i class="fas fa-edit"></i>Modificar</button>
+                            [disabled]="formCrearPago.form.invalid"><i class="fas fa-edit"></i><span class="mx-1">Modificar</span></button>
                     </div>
                 </form>
             </div>
@@ -105,8 +104,8 @@
                             <td>{{item.mes}}</td>
                             <td>{{item.anio}}</td>
                             <td>{{item.fecha | date:'short'}}</td>
-                            <td><button class="btn btn-primary" (click)="mostrarModificar(item)"><i class="fas fa-edit"></i>Editar</button></td>
-                            <td><button class="btn btn-danger" (click)="eliminarPago(item._id)"><i class="far fa-trash-alt"></i>Eliminar</button></td>
+                            <td><button class="btn btn-primary" (click)="mostrarModificar(item)"><i class="fas fa-edit"></i><span class="mx-1">Editar</span> </button></td>
+                            <td><button class="btn btn-danger" (click)="eliminarPago(item._id)"><i class="far fa-trash-alt"></i><span class="mx-1">Eliminar</span></button></td>
                         </tr>
                     </tbody>
                     <tfoot>

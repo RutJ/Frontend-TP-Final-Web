@@ -14,7 +14,7 @@
             </div>
             <div class="col-md-9 col-12">
                 <div class="row card">
-                    <p class="my-title mr-0 p-2 mb-2 my-bg-dark-1"><span>Sevicios</span> Inscriptos</p>
+                    <p class="my-title mr-0 p-2 mb-2 my-bg-dark-1"><span>Servicios</span> Inscriptos</p>
                     <div class=" offset-md-1 row row-cols-1 row-cols-md-2">
                         <div class="col mb-4 col-md-5" *ngFor="let item of listaServiciosVisitados;let i = index;">
                             <div class="card" *ngIf="i<2">
@@ -42,7 +42,7 @@
                                     </button>
                                     <div class="card">
                                         <div class="card-body bg-dark">
-                                            <h5 class="card-title bg-success text-white">Monto: {{item.monto}}</h5>
+                                            <h5 class="card-title bg-success text-white">Monto: {{item.monto | currency:'ARS':'symbol':'1.2-2'}}</h5>
                                             <p class="card-text">Mes: {{item.mes}}</p>
                                             <p class="card-text">Anio: {{item.anio}}</p>
                                         </div>

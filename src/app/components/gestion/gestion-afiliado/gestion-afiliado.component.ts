@@ -19,8 +19,10 @@ export class GestionAfiliadoComponent implements OnInit {
 
   listaAfiliados: Array<Afiliado>;
   listaAfiliadosFiltro: Array<Afiliado>;
+  listaUsuarios: Array<Usuario>;
   showModAfiliado: boolean = false;
   afiliado: Afiliado;
+  usuario: Usuario;
   usuarioSocio: Usuario;
   buscarUsuario: boolean = false;
   buscarAfiliado: boolean = false;
@@ -36,15 +38,35 @@ export class GestionAfiliadoComponent implements OnInit {
 
     this.listaAfiliados = new Array<Afiliado>();
     this.listaAfiliadosFiltro = new Array<Afiliado>();
+    this.listaUsuarios = new Array<Usuario>();
     this.afiliado = new Afiliado();
+    this.usuario = new Usuario();
     this.usuarioSocio = new Usuario();
     this.getAfiliados();
+    this.getUsuarios();
 
   }
 
   /*filtrar tabla*/
   public filtrar(){
     this.listaAfiliadosFiltro = this.listaAfiliados.filter(element => element.nombres.toLowerCase().indexOf(this.filtrarTabla) > -1 || element.apellido.toLowerCase().indexOf(this.filtrarTabla) > -1);
+  }
+
+  /*Obtener usuarios*/
+  public getUsuarios(){
+    this.listaUsuarios = new Array<Usuario>();
+    this._servUsuario.getUsuarios().subscribe(
+      (res) => {
+        res.forEach(element => {
+          Object.assign(this.usuario, element);
+          this.listaUsuarios.push(this.usuario);
+          this.usuario = new Usuario();
+        });
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
   }
 
   /*Obtener afiliados*/
@@ -106,8 +128,22 @@ export class GestionAfiliadoComponent implements OnInit {
   }
 
   /*Eliminar afiliado*/
-  public eliminarAfiliado(id: string) {
-    this._servAfiliado.eliminarAfiliado(id).subscribe(
+  public eliminarAfiliado(afiliado: Afiliado) {
+    var i: number = 0;
+    for(i;i <= this.listaUsuarios.length-1; i++){
+      if(this.listaUsuarios[i].usuario == afiliado.email){
+        this.usuario = this.listaUsuarios[i];
+      }  
+        console.log(this.usuario);
+        this.usuario.activo = false;
+        this._servUsuario.modificarUsuario(this.usuario).subscribe(
+          (res) => {
+            console.log(res);
+            this.getUsuarios();
+          }
+        );
+      }  
+    this._servAfiliado.eliminarAfiliado(afiliado._id).subscribe(
       (res) => {
         this._toastr.error("Afiliado Eliminado", "Eliminado");
         this.getAfiliados();
