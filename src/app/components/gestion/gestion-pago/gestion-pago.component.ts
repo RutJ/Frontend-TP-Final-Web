@@ -23,12 +23,15 @@ export class GestionPagoComponent implements OnInit {
   showModPago: boolean = false;
   mostrar:boolean=false;
   monto:number=0;
+  filtrarTabla:string="";
+  listaPagosFiltro: Array<Pago>;
   
 
   constructor(private _servPago:PagoService, public _servLogin:LoginService,private _toastr:ToastrService) { 
     this.afiliado = new Afiliado();
     this.pago = new Pago();
     this.pagos = new Array<Pago>();
+    this.listaPagosFiltro= new Array<Pago>();
     //this.pagos = JSON.parse(sessionStorage.getItem('pagos')) || new Array<Pago>();
     this.getPagos();
     
@@ -37,11 +40,13 @@ export class GestionPagoComponent implements OnInit {
    /*Obtener pagos*/
    public getPagos(){
     this.pagos = new Array<Pago>();
+    this.listaPagosFiltro = new Array<Pago>();
     this._servPago.getPagos().subscribe(
       (res) => {
         res.forEach(element => {
           Object.assign(this.pago, element);
           this.pagos.push(this.pago);
+          this.listaPagosFiltro.push(this.pago);
           this.pago = new Pago();
         });
       },
@@ -181,7 +186,7 @@ export class GestionPagoComponent implements OnInit {
           layout: 'lightHorizontalLines', // optional
           table: {
             headerRows: 1,
-            widths: [ '*', 'auto', 100, '*' ],
+            widths: [ 170 , 100 , 100, 100 ],
     
             body: [
               [ { text: 'Email Afiliado', bold: true }, { text: 'MONTO $', bold: true }, { text: 'AÑO', bold: true }, { text: 'MES', bold: true } ],
@@ -219,6 +224,11 @@ export class GestionPagoComponent implements OnInit {
       const element = this.pagos[i];
       this.monto=this.monto+element.monto
     }
+  }
+
+  /*filtrar tabla*/
+  public filtrar(){
+    this.listaPagosFiltro = this.pagos.filter(element => element.afiliado.email.toLowerCase().indexOf(this.filtrarTabla) > -1);
   }
 
 
