@@ -79,7 +79,8 @@
                         </div>
                     </form>
                 </div>
-                <table class="table table-striped text-center my-bg-dark-2" [mfData]="listaUsuariosFiltro" #mf="mfDataTable"
+                <div class="table-responsive">
+                    <table class="table table-striped text-center my-bg-dark-2" [mfData]="listaUsuariosFiltro" #mf="mfDataTable"
                     [mfRowsOnPage]="5">
                     <thead class="text-white">
                         <tr>
@@ -119,6 +120,8 @@
                         </tr>
                     </tfoot>
                 </table>
+                </div>
+                
             </div>
         </div>
     </div>

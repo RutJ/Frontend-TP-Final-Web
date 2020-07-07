@@ -99,7 +99,8 @@
                             <p class="card-text"><span> Descripcion:</span> {{servicio.descripcion}}</p>
                             <p class="card-text"><span> ¿Activo?:</span> {{servicio.activo && 'Si' || 'No'}}</p>
                             <p class="p-2 my-bg-dark-1"><span>Afiliados</span> Inscriptos</p>
-                            <table class="table table-striped text-center text-white" [mfData]="servicio.afiliadosInsc" #mf="mfDataTable"
+                            <div class="table-responsive">
+                                <table class="table table-striped text-center text-white" [mfData]="servicio.afiliadosInsc" #mf="mfDataTable"
                                 [mfRowsOnPage]="5">
                                 <thead>
                                     <tr>
@@ -135,6 +136,9 @@
                             </table>
                             <button class="btn btn-primary mx-2"(click)="mostrarModificar(servicio)"><i class="fas fa-pencil-alt"></i> Modificar</button>
                             <button class="btn btn-danger mx-2"(click)="modificarEstadoServicio(servicio)"><i class="fas fa-times"></i> {{servicio.activo && 'Desactivar' || 'Activar'}}</button>
+
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
