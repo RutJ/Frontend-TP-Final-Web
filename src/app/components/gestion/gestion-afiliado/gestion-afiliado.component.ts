@@ -89,6 +89,8 @@ export class GestionAfiliadoComponent implements OnInit {
 
   /*Crear afiliado*/
   public crearAfiliado() {
+    this.afiliado.estado = true;
+    console.log(this.afiliado);
     this._servAfiliado.agregarAfiliado(this.afiliado).subscribe(
       (res) => {
         this._toastr.success("Afiliado Creado", "Exito");
@@ -118,6 +120,7 @@ export class GestionAfiliadoComponent implements OnInit {
   }
   public mostrarModificar(afiliadoMod: Afiliado) {
     this.afiliado = afiliadoMod;
+    console.log(this.afiliado);
     this.showModAfiliado = true;
     this.validarImagen = true;
   }
@@ -128,29 +131,44 @@ export class GestionAfiliadoComponent implements OnInit {
   }
 
   /*Eliminar afiliado*/
-  public eliminarAfiliado(afiliado: Afiliado) {
+  public modificarEstadoAfiliado(afiliado: Afiliado) {
     var i: number = 0;
-    for(i;i <= this.listaUsuarios.length-1; i++){
-      if(this.listaUsuarios[i].usuario == afiliado.email){
-        this.usuario = this.listaUsuarios[i];
-      }  
-        console.log(this.usuario);
-        this.usuario.activo = false;
-        this._servUsuario.modificarUsuario(this.usuario).subscribe(
-          (res) => {
-            console.log(res);
-            this.getUsuarios();
-          }
-        );
-      }  
-    this._servAfiliado.eliminarAfiliado(afiliado._id).subscribe(
+    afiliado.estado = !afiliado.estado;   
+    if (afiliado.estado == false){
+      for(i;i <= this.listaUsuarios.length-1; i++){
+        if(this.listaUsuarios[i].usuario == afiliado.email){
+          this.usuario = this.listaUsuarios[i];
+        }  
+          this.usuario.activo = false;
+          this._servUsuario.modificarUsuario(this.usuario).subscribe(
+            (res) => {
+              this.getUsuarios();
+            }
+          );
+        }
+        
+    }else{
+      for(i;i <= this.listaUsuarios.length-1; i++){
+        if(this.listaUsuarios[i].usuario == afiliado.email){
+          this.usuario = this.listaUsuarios[i];
+        }  
+          this.usuario.activo = true;
+          this._servUsuario.modificarUsuario(this.usuario).subscribe(
+            (res) => {
+              this.getUsuarios();
+            }
+          );
+        }
+        
+    }
+    this._servAfiliado.actualizarAfiliado(afiliado).subscribe(
       (res) => {
-        this._toastr.error("Afiliado Eliminado", "Eliminado");
+        this._toastr.info("Estado del afiliado modificado", "Habilitar/Deshabilitar");
         this.getAfiliados();
       },
       (error) => {
         console.log(error);
-        this._toastr.error("Ha ocurrido un error al crear usuario", "Error");
+        this._toastr.error("Ha ocurrido un error al modificar afiliado", "Error");
       }
     )
   }

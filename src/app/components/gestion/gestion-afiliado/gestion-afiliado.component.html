@@ -1,4 +1,4 @@
-<div *ngIf="_servLogin.usuarioLogeado.perfil == 'administrador' || _servLogin.usuarioLogeado.perfil == 'administrativo'">
+<div> <!--*ngIf="_servLogin.usuarioLogeado.perfil == 'administrador' || _servLogin.usuarioLogeado.perfil == 'administrativo'"-->
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3">
@@ -122,6 +122,9 @@
                             <th>
                                 Imagen
                             </th>
+                            <th>
+                               <mfDefaultSorter by="estado">Habilitado</mfDefaultSorter> 
+                            </th>
                             <th colspan="2">
                                 Acciones
                             </th>
@@ -134,8 +137,9 @@
                             <td>{{afiliado.dni}}</td>
                             <td>{{afiliado.email}}</td>
                             <td><img src="{{afiliado.imagen}}" height="50px" width="50px"></td>
+                            <td>{{afiliado.estado && 'Si' || 'No'}}</td>
                             <td><button class="btn btn-primary" (click)="mostrarModificar(afiliado)">Modificar</button></td>
-                            <td><button class="btn btn-danger" (click)="eliminarAfiliado(afiliado)">Eliminar</button></td>
+                            <td><button class="btn btn-danger" (click)="modificarEstadoAfiliado(afiliado)">{{afiliado.estado && 'Deshabilitar' || 'Habilitar'}}</button></td>
                             <td><button class="btn btn-success" (click)="crearSocio(afiliado)">Socio</button></td>
                         </tr>
                     </tbody>

@@ -6,6 +6,7 @@ export class Afiliado {
     email: string;
     imagen: string;
     telefono: number;
-
+    estado: boolean;
+    
     constructor(){}
 }
