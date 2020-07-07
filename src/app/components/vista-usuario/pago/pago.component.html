@@ -1,1 +1,23 @@
-<p>pago works!</p>
+<div class="row">
+    <content class="col-md-8 offset-md-2">
+        <h1 class="text-lg-center">Pagos</h1>
+          <div class="row row-cols-1 row-cols-md-2">
+            <content class="col-md-6" *ngFor="let item of listaPagos">
+              <div class="col6 mb-4 text-center">
+                <button class="btn btn-success" type="button">DETALLE DE PAGO: 
+                    {{item.fecha | date:'short'}}  
+                 </button>
+                    <div class="card">
+                        <div class="card-body bg-dark">
+                          <h5 class="card-title bg-success text-white">Monto: {{item.monto}}</h5>
+                            <p class="card-text">Mes: {{item.mes}}</p>
+                            <p class="card-text">Anio: {{item.anio}}</p>
+                        </div>
+                    </div>
+              </div> 
+            </content>
+        </div>
+    </content>
+</div>
+    
+  

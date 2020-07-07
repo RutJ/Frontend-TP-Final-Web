@@ -33,7 +33,7 @@
                 routerLinkActive="active"><strong>Novedades</strong></a>
             </li>
             <!-- VISTA PAGOS -->
-            <li *ngIf="_servLogin.usuarioLogeado.perfil == 'socio' || _servLogin.usuarioLogeado.perfil == 'administrador' " class="nav-item active">
+            <li *ngIf="_servLogin.usuarioLogeado.perfil == 'socio'" class="nav-item active">
               <a class="btn btn-success m-2 text-white my-text-sm" [routerLink]="['vista-pago']"
                 routerLinkActive="active"><strong>Pagos</strong></a>
             </li>
