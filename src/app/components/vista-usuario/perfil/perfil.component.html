@@ -1,1 +1,96 @@
-<p>perfil works!</p>
+<div class="cuerpo">
+    <div class="container">
+        <p class="text-left font-italic my-text-lg"><span>Mi</span> Perfil</p>
+        <div class="row">
+            <div class="col-md-3 col-12">
+                <img src="{{_servLogin.afiliadoLogeado.imagen}}" width="250" height="250" class="card-img-top d-inline-block align-top">
+                <div class="card">
+                    <p class="card-text"><span>Apellido:<br></span> {{_servLogin.afiliadoLogeado.apellido}}</p>
+                    <p class="card-text"><span>Nombres:<br></span> {{_servLogin.afiliadoLogeado.nombres}}</p>
+                    <p class="card-text"><span>DNI:<br></span> {{_servLogin.afiliadoLogeado.dni}}</p>
+                    <p class="card-text"><span>EMAIL:<br></span> {{_servLogin.afiliadoLogeado.email}}</p>
+                    <p class="card-text"><span>TELEFONO:<br></span> {{_servLogin.afiliadoLogeado.telefono}}</p>       
+                </div>
+            </div>
+            <div class="col-md-9 col-12">
+                <div class="row card">
+                    <p class="my-title mr-0 p-2 mb-2 my-bg-dark-1"><span>Sevicios</span> Inscriptos</p>
+                    <div class=" offset-md-1 row row-cols-1 row-cols-md-2">
+                        <div class="col mb-4 col-md-5" *ngFor="let item of listaServiciosVisitados;let i = index;">
+                            <div class="card" *ngIf="i<2">
+                                <img src="{{item.imagen}}" width="250" height="250" class="card-img-top" alt="...">
+                                <div id="contCard" class="card-body">
+                                    <p class="card-text"><span>Titulo:<br></span> {{item.nombre}}</p>
+                                    <p class="card-text"><span>Descripcion:<br></span> {{item.descripcion}}</p>
+                             </div>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="text-right">
+                        <button class="btn btn-outline-primary"  (click)="redirigirServicio()"
+                            routerLinkActive="active"><strong>Ver Todas</strong></button>
+                    </div>
+                </div>
+                <div class="row card">
+                    <p class="my-title p-2 m-0 mb-2 my-bg-dark-1"><span>Pagos</span> Realizados</p>
+                    <content class="col-md-8 offset-md-2">
+                        <div class="row row-cols-1 row-cols-md-2">
+                            <content class="col-md-6" *ngFor="let item of listaPagos;let i = index;">
+                                <div  *ngIf=" i<4" class="col6 mb-4 text-center">
+                                    <button class="btn btn-success" type="button">DETALLE DE PAGO:
+                                        {{item.fecha | date:'short'}}
+                                    </button>
+                                    <div class="card">
+                                        <div class="card-body bg-dark">
+                                            <h5 class="card-title bg-success text-white">Monto: {{item.monto}}</h5>
+                                            <p class="card-text">Mes: {{item.mes}}</p>
+                                            <p class="card-text">Anio: {{item.anio}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </content>
+                        </div>
+                    </content>
+                    <div class="text-right">
+                        <button class="btn btn-outline-primary"  (click)="redirigirPago()"
+                            routerLinkActive="active"><strong>Ver Todas</strong></button>
+                    </div>
+                </div>
+                <div class="row card">
+                    <p class="my-title p-2 m-0 mb-2 my-bg-dark-1"><span>Novedades</span> Pendientes</p>
+                    <div class="col col-md-12">
+                        <div class="accordion" id="accordionNovedad" [attr.id]="'accordion_' + i"
+                            *ngFor="let item of novedades;let i = index;">
+                            <div *ngIf="item.estado=='pendiente' " class="card pl-0 pr-0 col-12">
+                                <div class="col-12 pl-0 pr-0">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link btn-block text-left my-title p-2 my-bg-dark-1"
+                                            type="button" data-toggle="collapse" [attr.data-parent]="'#accordion_' + i"
+                                            [attr.href]="'#collapseOne_' + i" aria-expanded="true">
+                                            <label class="text-center font-italic my-text-md"><span>Asunto:
+                                                </span>{{item.asunto}}</label>
+                                            <label class="float-right">{{item.fecha | date: 'short'}}</label>
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div [attr.id]="'collapseOne_' + i" class="collapse" aria-labelledby="headingOne"
+                                    data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <div class="offset-1 mt-4">
+                                            <p class="font-italic row my-text-md"><br><span>Novedad:
+                                                </span><br>{{item.texto}}</p><br>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <button class="btn btn-outline-primary"  (click)="redirigirNovedad()"
+                            routerLinkActive="active"><strong>Ver Todas</strong></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

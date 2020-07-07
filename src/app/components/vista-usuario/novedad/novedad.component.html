@@ -1,5 +1,4 @@
-<!--*ngIf="_servLogin.usuarioLogeado.perfil == 'socio'"-->
-<div>
+<div *ngIf="_servLogin.usuarioLogeado.perfil == 'socio'">
     <div class="container">
         <div class="row py-5">
             <div class="col-md-6 offset-md-3 my-3 p-0 my-bg-dark-2">
@@ -71,11 +70,11 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let novedad of mf.data">
-                        <td *ngIf="novedad.estado=='pendiente' && novedad.usuario.usuario == _servLogin.usuarioLogeado.usuario">{{novedad.asunto}}</td>
-                        <td *ngIf="novedad.estado=='pendiente' && novedad.usuario.usuario == _servLogin.usuarioLogeado.usuario">{{novedad.texto}}</td>
-                        <td *ngIf="novedad.estado=='pendiente' && novedad.usuario.usuario == _servLogin.usuarioLogeado.usuario">{{novedad.fecha | date: 'shortDate'}}
+                        <td *ngIf="novedad.estado=='pendiente' ">{{novedad.asunto}}</td>
+                        <td *ngIf="novedad.estado=='pendiente' ">{{novedad.texto}}</td>
+                        <td *ngIf="novedad.estado=='pendiente' ">{{novedad.fecha | date: 'shortDate'}}
                         </td>
-                        <td *ngIf="novedad.estado=='pendiente' && novedad.usuario.usuario == _servLogin.usuarioLogeado.usuario">
+                        <td *ngIf="novedad.estado=='pendiente' ">
                             <button id="btnPrevious" class="btn btn-primary"
                                 (click)="mostrarModificar(novedad)">Seleccionar
                             </button>
@@ -99,9 +98,9 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let novedad2 of mf2.data">
-                        <td  *ngIf="novedad2.estado=='procesado' && novedad2.usuario.usuario == _servLogin.usuarioLogeado.usuario">{{novedad2.asunto}}</td>
-                        <td *ngIf="novedad2.estado=='procesado' && novedad2.usuario.usuario == _servLogin.usuarioLogeado.usuario">{{novedad2.texto}}</td>
-                        <td *ngIf="novedad2.estado=='procesado' && novedad2.usuario.usuario == _servLogin.usuarioLogeado.usuario">{{novedad2.fecha | date: 'shortDate'}}
+                        <td  *ngIf="novedad2.estado=='procesado'">{{novedad2.asunto}}</td>
+                        <td *ngIf="novedad2.estado=='procesado'">{{novedad2.texto}}</td>
+                        <td *ngIf="novedad2.estado=='procesado'">{{novedad2.fecha | date: 'shortDate'}}
                         </td>
                     </tr>
                 </tbody>

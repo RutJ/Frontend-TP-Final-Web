@@ -16,11 +16,9 @@ export class GestionNovedadComponent implements OnInit {
   novedad:Novedad;
   usuario:Usuario;
   novedadMod: Boolean;
-  textoVer:string;
   afiliado:Afiliado;
 
   afiliados:Array<Afiliado>;
-  afiliadosAux:Array<Afiliado>;
   novedades:Array<Novedad>;
   constructor(private novedadService:NovedadService,
     public _servLogin: LoginService,
@@ -132,7 +130,6 @@ export class GestionNovedadComponent implements OnInit {
   
   /**VER NOVEDAD */
   public verNovedad(novedad:Novedad){
-    this.textoVer=novedad.texto;
     if(novedad.estado=="pendiente"){
     novedad.estado="procesado";
     this.novedad=novedad;

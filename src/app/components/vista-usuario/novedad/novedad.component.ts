@@ -60,8 +60,10 @@ export class NovedadComponent implements OnInit {
       (result) =>{
         var novedad: Novedad = new Novedad();
         result.forEach(element => {
-          Object.assign(novedad,element);
+          if(element.usuario.usuario == this._servLogin.usuarioLogeado.usuario){
+            Object.assign(novedad,element);
           this.novedades.push(novedad);
+          }
           novedad = new Novedad();
         });
       },
