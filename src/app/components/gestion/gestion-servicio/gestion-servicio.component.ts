@@ -158,24 +158,24 @@ export class GestionServicioComponent implements OnInit {
               this.getProfilePicObject(servicio),
             ],
             [{
-              text: 'Nombre: '+servicio.nombre,
+              text: 'NOMBRE: '+servicio.nombre,
               style: 'jobTitle',
               alignment: 'left',
             },
             {
-              text: 'Descripcion: '+servicio.descripcion,
+              text: 'ACTIVO?: '+ servicio.activo,
               alignment: 'left',
             },
             {
-              text: 'Activo?: '+ servicio.activo,
+              text: 'CANTIDAD DE INSCRIPTOS: '+ servicio.afiliadosInsc.length,
               alignment: 'left',
             },
             {
-              text: 'Cantidad de inscriptos: '+ servicio.afiliadosInsc.length,
+              text: 'DESCRIPCION: '+servicio.descripcion,
               alignment: 'left',
             },
             {
-              text: 'Lista de inscriptos: ',
+              text: 'LISTA DE INSCRIPTOS: ',
               alignment: 'center',
               bold: true,
             },
@@ -213,7 +213,7 @@ export class GestionServicioComponent implements OnInit {
 
       table: {
          headerRows: 1,
-        widths: ['*', '*', '*', '*'],
+        widths: [100, 100, 100, 170],
         body: [
           [
           {

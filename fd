@@ -1,0 +1,168 @@
+[33mcommit 8887b110d380a56defc76e34fbd2220ad958d0c6[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: LucasChoqueV <lucaasbruu@gmail.com>
+Date:   Wed Jul 8 17:14:32 2020 -0300
+
+    modificando detalles
+
+[33mcommit 6807c03afe645b6ef839bba185e1d455d7c3c1a7[m
+Merge: 6caf9b9 db1437c
+Author: FranG98 <motherofsoad@hotmail.com>
+Date:   Tue Jul 7 17:32:41 2020 -0300
+
+    Merge branch 'master' of https://github.com/RutJ/Frontend-TP-Final-Web
+
+[33mcommit 6caf9b9c46dd7e09eec963f2eb8c5bc701fd2854[m
+Author: FranG98 <motherofsoad@hotmail.com>
+Date:   Tue Jul 7 17:32:09 2020 -0300
+
+    Ya no es posible eliminar Afiliados, solo deshabilitarlos como en el caso de Usuarios
+
+[33mcommit db1437cf6ffd181766bd9dfb26d520155a2a2dd4[m
+Author: Fernando <deluk231lukkah@gmail.com>
+Date:   Tue Jul 7 17:32:05 2020 -0300
+
+    Detalle de vista perfil
+
+[33mcommit 8203f5cb7d735176f6aaeae05167f88e1b90fcaa[m
+Author: FranG98 <motherofsoad@hotmail.com>
+Date:   Tue Jul 7 15:35:00 2020 -0300
+
+    pequeños cambios de diseño en ventanas Pago y Perfil, se modifico la funcionalidad del boton Eliminar en la gestion de Afiliado
+
+[33mcommit 3116ee8e0681d8fa7da7166ded98c294fda2ad62[m
+Author: Fernando <deluk231lukkah@gmail.com>
+Date:   Tue Jul 7 15:21:54 2020 -0300
+
+    Creacion de la pagina del perfil de afiliado. Correccion de errors en vista-novedad
+
+[33mcommit 81163530c344bade2a2aa994dce59876ba20e93a[m
+Author: Fernando <deluk231lukkah@gmail.com>
+Date:   Tue Jul 7 05:58:16 2020 -0300
+
+    Modicación de estilo de las vistas de novedad. Agrego el atributo quitado para evitar borrar una novedad de la base de datos
+
+[33mcommit e0caedddcfabe6faa8fa837ed0463455388f8b7f[m
+Author: RutJ <jaquelinacruz.95@gmail.com>
+Date:   Tue Jul 7 04:42:21 2020 -0300
+
+    modifique la vista de usuario, ahora puede ver todos sus pagos
+
+[33mcommit 634793cd23de5cc7c6de3b764ce81a5a0290b517[m
+Author: RutJ <jaquelinacruz.95@gmail.com>
+Date:   Tue Jul 7 00:08:54 2020 -0300
+
+    modifique la vista del crud de pagos, las tablas ahora son reponsivas, cree un componente pago en la vista del usuario que esta vacio aún
+
+[33mcommit 9abf620ffe219af20cdf559489f3b44d9444e391[m
+Author: Fernando <deluk231lukkah@gmail.com>
+Date:   Mon Jul 6 20:47:00 2020 -0300
+
+    Separé la vista de novedades para usuario y admin. Modifiqué el estilo, ahora se puede obtener la imagen del afiliado que envió la novedad
+
+[33mcommit 0be6301f4b6f92feac51ef5f1adc4931ae0cbd77[m
+Author: LucasChoqueV <lucaasbruu@gmail.com>
+Date:   Mon Jul 6 17:27:36 2020 -0300
+
+    mejorando login y servicios
+
+[33mcommit ed3dcadde619ccf2d417910cf9f4988532d3e37c[m
+Author: FranG98 <motherofsoad@hotmail.com>
+Date:   Sun Jul 5 23:56:32 2020 -0300
+
+    Modificaciones del diseño
+
+[33mcommit 40db03dbf71049543e394cb09801af5ab0751188[m
+Author: LucasChoqueV <lucaasbruu@gmail.com>
+Date:   Sun Jul 5 22:54:10 2020 -0300
+
+    agregando diseño
+
+[33mcommit 88b75d3260620ca13bf444013ea921dffe1a4817[m
+Author: RutJ <jaquelinacruz.95@gmail.com>
+Date:   Sun Jul 5 20:04:16 2020 -0300
+
+    agregue la posibilidad para abrir, descargar e imprimir un pdf para el crud de afiliados, servicios y pagos
+
+[33mcommit 74978410a4becad1112031a1f041b5e3585e7053[m
+Author: LucasChoqueV <lucaasbruu@gmail.com>
+Date:   Sat Jul 4 19:21:09 2020 -0300
+
+    agregando estilos
+
+[33mcommit 4886d9912a4d408b5437569e2d2bf7d14ecd6380[m
+Author: FranG98 <motherofsoad@hotmail.com>
+Date:   Sat Jul 4 00:12:13 2020 -0300
+
+    corrección de error
+
+[33mcommit 9c9cc8331738811bcef1499b3d4f6819aae1a636[m
+Author: FranG98 <motherofsoad@hotmail.com>
+Date:   Fri Jul 3 23:59:46 2020 -0300
+
+    Diseño del footer y modificaciones pequeñas
+
+[33mcommit 314b71ec0525212aa056d0ff7f3337bef2f28554[m
+Author: LucasChoqueV <lucaasbruu@gmail.com>
+Date:   Fri Jul 3 17:17:08 2020 -0300
+
+    agregando facebook y otras mejoras
+
+[33mcommit 69992e7b560499bbf038ab07061a8482258ee973[m
+Author: LucasChoqueV <lucaasbruu@gmail.com>
+Date:   Wed Jul 1 20:33:49 2020 -0300
+
+    agregando noticias
+
+[33mcommit 121a71ee6345c6b83d40a087168bcbdcf4094ac2[m
+Author: RutJ <jaquelinacruz.95@gmail.com>
+Date:   Tue Jun 30 16:41:42 2020 -0300
+
+    crud de pagos frontend realizado
+
+[33mcommit 815472801570fbd86d98f4612015b6b23439d1f1[m
+Author: Fernando <deluk231lukkah@gmail.com>
+Date:   Tue Jun 30 14:09:23 2020 -0300
+
+    CRUD de novedades realizada
+
+[33mcommit 3f449d0011dd6646e58e17bd7b9e321c080db4a0[m
+Author: LucasChoqueV <lucaasbruu@gmail.com>
+Date:   Sun Jun 28 01:26:44 2020 -0300
+
+    agregando servicios y mejoras
+
+[33mcommit d7d07040b75b6c0495a0ad752fc448630ae08a7c[m
+Author: FranG98 <motherofsoad@hotmail.com>
+Date:   Sat Jun 27 19:40:17 2020 -0300
+
+    CRUD de afiliado en la vista/Frontend
+
+[33mcommit 71a0eef7c6a5f2663d9b1a30d46116097339ec84[m
+Author: Fernando <deluk231lukkah@gmail.com>
+Date:   Fri Jun 26 18:46:56 2020 -0300
+
+    Eliminacion de header y footer
+
+[33mcommit c44c9d0b85922d2ef7c0d985ab28db8f9a7c63fb[m
+Author: LucasChoqueV <lucaasbruu@gmail.com>
+Date:   Fri Jun 26 18:18:33 2020 -0300
+
+    agregando crud de usuarios en la vista
+
+[33mcommit 328e8aa84750c8f9aa62b300f994495762114659[m
+Author: LucasChoqueV <lucaasbruu@gmail.com>
+Date:   Wed Jun 24 22:04:11 2020 -0300
+
+    testing
+
+[33mcommit a557269f940e711aec137b3a6b56c1033976e145[m
+Author: Fernando <deluk231lukkah@gmail.com>
+Date:   Wed Jun 24 20:09:55 2020 -0300
+
+    Subida del proyecto
+
+[33mcommit a15860e08d4e01e900cb40b2f876f9aa0b7b45c8[m
+Author: Fernando <deluk231lukkah@gmail.com>
+Date:   Wed Jun 24 19:21:28 2020 -0300
+
+    initial commit
