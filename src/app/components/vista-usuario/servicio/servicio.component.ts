@@ -3,6 +3,7 @@ import { ServicioService } from 'src/app/service/servicio.service';
 import { Servicio } from 'src/app/models/servicio';
 import { LoginService } from 'src/app/service/login.service';
 import { Afiliado } from 'src/app/models/afiliado';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-servicio',
@@ -15,7 +16,7 @@ export class ServicioComponent implements OnInit {
   listaServiciosVisitados:Array<Servicio>;
   listaServiciosNoVisitados:Array<Servicio>;
   servicio:Servicio;
-  constructor(private _servServicio:ServicioService, public _servLogin:LoginService) {
+  constructor(private _servServicio:ServicioService, public _servLogin:LoginService, private _toast:ToastrService) {
     this.listaServicios = new Array<Servicio>();
     this.listaServiciosVisitados = new Array<Servicio>();
     this.listaServiciosNoVisitados = new Array<Servicio>();
@@ -49,6 +50,7 @@ export class ServicioComponent implements OnInit {
         (result) => {
           console.log(result);
           this.getServicios();
+          this._toast.success("Inscripto al servicio","Exito");
         },
         (error) => {
           console.log(error);
@@ -58,8 +60,6 @@ export class ServicioComponent implements OnInit {
     else{
       console.log("no hay socio");
     }
-
-    
   }
 
   public darBaja(servicioBaja:Servicio){
@@ -68,6 +68,7 @@ export class ServicioComponent implements OnInit {
       (result) => {
         console.log(result);
         this.getServicios();
+        this._toast.error("Se dio de baja","Error");
       },
       (error) => {
         console.log(error);

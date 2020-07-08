@@ -3,34 +3,59 @@
         <p class="text-left font-italic my-text-lg"><span>Mi</span> Perfil</p>
         <div class="row">
             <div class="col-md-3 col-7 offset-md-0 offset-3">
-                <img src="{{_servLogin.afiliadoLogeado.imagen}}" width="250" height="250" class="card-img-top d-inline-block align-top">
+                <img src="{{_servLogin.afiliadoLogeado.imagen}}" width="250" height="250"
+                    class="card-img-top d-inline-block align-top">
                 <div class="card">
                     <p class="card-text"><span>Apellido: </span> {{_servLogin.afiliadoLogeado.apellido}}</p>
                     <p class="card-text"><span>Nombres:</span> {{_servLogin.afiliadoLogeado.nombres}}</p>
                     <p class="card-text"><span>DNI:</span> {{_servLogin.afiliadoLogeado.dni}}</p>
                     <p class="card-text"><span>EMAIL: </span> {{_servLogin.afiliadoLogeado.email}}</p>
-                    <p class="card-text"><span>TELEFONO: </span> {{_servLogin.afiliadoLogeado.telefono}}</p>       
+                    <p class="card-text"><span>TELEFONO: </span> {{_servLogin.afiliadoLogeado.telefono}}</p>
                 </div>
             </div>
             <div class="col-md-8 col-12">
                 <div class="row card">
+                    <p class="my-title mr-0 p-2 mb-2 my-bg-dark-1"><span>Modificar</span> Contraseña</p>
+                    <div class="row row-cols-1 row-cols-md-2 justify-content-center">
+                        <form class="py-4" #formPass="ngForm">
+
+                            <div class="form-group">
+                                <label for="confirmar">Contraseña nueva</label>
+                                <input type="password" name="confirmar" id="confirmar" class="form-control"
+                                    [(ngModel)]="passNueva" required #confirmarV="ngModel">    
+                                <!-- Validacion -->
+                                <div *ngIf="confirmarV.invalid && (confirmarV.dirty || confirmarV.touched)">
+                                    <div *ngIf="confirmarV.errors.required">
+                                        <small class="text-danger"><Strong>*Campo Obligatorio</Strong></small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <button class="btn btn-success" (click)="modificarPass()" [disabled]="(!formPass.form.valid)">Aceptar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row card">
                     <p class="my-title mr-0 p-2 mb-2 my-bg-dark-1"><span>Servicios</span> Inscriptos</p>
                     <div class="row row-cols-1 row-cols-md-2 justify-content-center">
-                        <div class=" col mb-4 col-md-5 col-6" *ngFor="let item of listaServiciosVisitados;let i = index;">
+                        <div class=" col mb-4 col-md-5 col-6"
+                            *ngFor="let item of listaServiciosVisitados;let i = index;">
                             <div class="card" *ngIf="i<2">
                                 <img src="{{item.imagen}}" width="250" height="250" class="card-img-top" alt="...">
                                 <div id="contCard" class="card-body">
                                     <p class="card-text"><span>Titulo:<br></span> {{item.nombre}}</p>
-                                    <p class="card-text"><span>Descripcion:<br></span> {{item.descripcion}} 
-                                        <br><a class="text-primary"  (click)="redirigirServicio()"
-                                        routerLinkActive="active">Ver más</a></p>
-                                    
-                             </div>
+                                    <p class="card-text"><span>Descripcion:<br></span> {{item.descripcion}}
+                                        <br><a class="text-primary" (click)="redirigirServicio()"
+                                            routerLinkActive="active">Ver más</a></p>
+
+                                </div>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                     <div class="text-right">
-                        <button class="btn btn-outline-primary"  (click)="redirigirServicio()"
+                        <button class="btn btn-outline-primary" (click)="redirigirServicio()"
                             routerLinkActive="active">Ver Todas</button>
                     </div>
                 </div>
@@ -39,13 +64,14 @@
                     <content class="col-md-8 offset-md-2">
                         <div class="row row-cols-1 row-cols-md-2">
                             <content class="col-md-6" *ngFor="let item of listaPagos;let i = index;">
-                                <div  *ngIf=" i<4" class="col6 mb-4 text-center">
+                                <div *ngIf=" i<4" class="col6 mb-4 text-center">
                                     <button class="btn btn-success" type="button">DETALLE DE PAGO:
                                         {{item.fecha | date:'short'}}
                                     </button>
                                     <div class="card">
                                         <div class="card-body bg-dark">
-                                            <h5 class="card-title bg-success text-white">Monto: {{item.monto | currency:'ARS':'symbol':'1.2-2'}}</h5>
+                                            <h5 class="card-title bg-success text-white">Monto:
+                                                {{item.monto | currency:'ARS':'symbol':'1.2-2'}}</h5>
                                             <p class="card-text">Mes: {{item.mes}}</p>
                                             <p class="card-text">Anio: {{item.anio}}</p>
                                         </div>
@@ -55,8 +81,8 @@
                         </div>
                     </content>
                     <div class="text-right">
-                        <button class="btn btn-outline-primary"  (click)="redirigirPago()"
-                            routerLinkActive="active">Ver Todas</button>
+                        <button class="btn btn-outline-primary" (click)="redirigirPago()" routerLinkActive="active">Ver
+                            Todas</button>
                     </div>
                 </div>
                 <div class="row card">
@@ -89,7 +115,7 @@
                         </div>
                     </div>
                     <div class="text-right">
-                        <button class="btn btn-outline-primary"  (click)="redirigirNovedad()"
+                        <button class="btn btn-outline-primary" (click)="redirigirNovedad()"
                             routerLinkActive="active">Ver Todas</button>
                     </div>
                 </div>

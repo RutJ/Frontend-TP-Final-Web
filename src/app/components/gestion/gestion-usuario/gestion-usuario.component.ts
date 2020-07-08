@@ -85,6 +85,7 @@ export class GestionUsuarioComponent implements OnInit {
   /*obtener usuarios*/
   public getUsuarios() {
     this.listaUsuarios = new Array<Usuario>();
+    this.listaUsuariosFiltro = new Array<Usuario>();
     this._servUsuario.getUsuarios().subscribe(
       (result) => {
         result.forEach(element => {

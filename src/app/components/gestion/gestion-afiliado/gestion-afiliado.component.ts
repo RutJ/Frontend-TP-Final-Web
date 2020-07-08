@@ -72,6 +72,7 @@ export class GestionAfiliadoComponent implements OnInit {
   /*Obtener afiliados*/
   public getAfiliados() {
     this.listaAfiliados = new Array<Afiliado>();
+    this.listaAfiliadosFiltro = new Array<Afiliado>();
     this._servAfiliado.obtenerAfiliados().subscribe(
       (res) => {
         res.forEach(element => {

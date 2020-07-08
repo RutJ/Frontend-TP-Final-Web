@@ -46,7 +46,7 @@ export class GestionNoticiaComponent implements OnInit {
     this._fb.api('/109421504150971/feed', apiMethod,
       {
         "message": noticia.titulo + "\n" + "\n" + noticia.descripcion,
-        "access_token":"EAANRwcbcS1IBALE7SgNHxiYDiaZBambAZC0xlgFnGSsj0thXiqL0ZBI89y7asR8ly749ldRjQZAwHDdYZB9QJ3Cr6SbHCrykV6QA78HljR2zAZB3rsguU0g6zQZCtp8EO4U2s78oJANgXSlGPTZCWpeKhRkkqtuhMsick1LBAbRR2xuoZAQQGsTiJtMuFIjcRZASz25HqAeS91QgZDZD"
+        "access_token":"EAANRwcbcS1IBAAHm3CCyC4XTYWNl7B0IysOKZC4m8JdwQNGrzcPMhZA4ZAVu17ThiOSc3oG86Qn7IIVuoHdpzGtKgqI4ZADCvhwLZB2A0maTKwUbNSjIlxjDarwDEhAZArTG5ppDZAZBoNmgCdLd8BMKWaWasLTIwh0qAk93o8YNYgCkostfvZBtn16wHOHlp0Vl4xZBZAKyFp1XgZDZD"
       });
   }
 

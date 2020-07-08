@@ -76,7 +76,6 @@
                 <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
                   <a *ngIf="_servLogin.usuarioLogeado.perfil == 'socio'" class="dropdown-item text-white btn btn-success my-text-sm" [routerLink]="['perfil']">Mi Perfil</a>
                   <div *ngIf="_servLogin.usuarioLogeado.perfil == 'socio'" class="dropdown-divider"></div>
-                  <a class="dropdown-item text-white btn btn-success my-text-sm" href="#">Cambiar Contraseña</a>
                   <div class="dropdown-divider"></div>
                   <a class="btn mx-2 text-white my-text-sm" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
                 </div>

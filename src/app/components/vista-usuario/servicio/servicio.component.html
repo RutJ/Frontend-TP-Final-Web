@@ -1,5 +1,4 @@
-<div>
-    <!-- *ngIf="_servLogin.isUsuarioLogeado" -->
+<div *ngIf="_servLogin.isUsuarioLogeado">
     <div class="container">
         <div class="row py-5">
             <div class="accordion col-md-12" id="accordionExample">
@@ -8,7 +7,7 @@
                         <h2 class="mb-0">
                             <button class="btn collapsed" type="button" data-toggle="collapse"
                                 data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            <p class="my-text-lg p-2 text-white"><span>Mis</span> Servicios</p>
+                                <p class="my-text-lg p-2 text-white"><span>Mis</span> Servicios</p>
                             </button>
                         </h2>
                     </div>
@@ -19,9 +18,11 @@
                                     <img src="{{visitado.imagen}}" class="card-img-top">
                                     <div class="card-body row">
                                         <h5 class="card-title col-lg-9 my-text-lg">{{visitado.nombre}}</h5>
-                                        <button class="btn btn-danger col-lg-3" (click)="darBaja(visitado)"><i class="fas fa-times"></i> Dar de Baja</button>
+                                        <button class="btn btn-danger col-lg-3" (click)="darBaja(visitado)"><i
+                                                class="fas fa-times"></i> Dar de Baja</button>
                                         <div class="h-divider py-1"></div>
-                                        <p class="card-text col-md-12 px-lg-5 py-4 my-text-sm">{{visitado.descripcion}}</p>
+                                        <p class="card-text col-md-12 px-lg-5 py-4 my-text-sm">{{visitado.descripcion}}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -46,9 +47,12 @@
                                     <img src="{{noVisitado.imagen}}" class="card-img-top">
                                     <div class="card-body row">
                                         <h5 class="card-title col-lg-9 my-text-lg">{{noVisitado.nombre}}</h5>
-                                        <button class="btn btn-success col-lg-3" (click)="inscribirAfiliado(noVisitado)"><i class="fas fa-plus"></i> Inscribirse</button>
+                                        <button class="btn btn-success col-lg-3"
+                                            (click)="inscribirAfiliado(noVisitado)"><i class="fas fa-plus"></i>
+                                            Inscribirse</button>
                                         <div class="h-divider py-1"></div>
-                                        <p class="card-text col-md-12 px-lg-5 py-4 my-text-sm">{{noVisitado.descripcion}}</p>
+                                        <p class="card-text col-md-12 px-lg-5 py-4 my-text-sm">
+                                            {{noVisitado.descripcion}}</p>
                                     </div>
                                 </div>
                             </div>

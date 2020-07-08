@@ -1,4 +1,4 @@
-<div > <!-- *ngIf="_servLogin.usuarioLogeado.perfil == 'administrativo'" -->
+<div *ngIf="_servLogin.usuarioLogeado.perfil == 'administrativo'"> 
     <div class="container">
         <div class="row py-5">
 
@@ -88,4 +88,4 @@
         </div>
     </div>
 </div>
-<!-- <div *ngIf="_servLogin.usuarioLogeado.perfil != 'administrativo'"><img src="https://media.tenor.com/images/b65504dbb7eeafc34f3ae35c455cf10f/tenor.gif" height="100%" width="100%"></div> -->
+<div *ngIf="_servLogin.usuarioLogeado.perfil != 'administrativo'"><img src="https://media.tenor.com/images/b65504dbb7eeafc34f3ae35c455cf10f/tenor.gif" height="100%" width="100%"></div>

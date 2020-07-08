@@ -9,6 +9,8 @@ import { ServicioService } from 'src/app/service/servicio.service';
 import { Servicio } from 'src/app/models/servicio';
 import { Afiliado } from 'src/app/models/afiliado';
 import { Router, ActivatedRoute } from '@angular/router';
+import { UsuarioService } from 'src/app/service/usuario.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-perfil',
@@ -31,6 +33,8 @@ export class PerfilComponent implements OnInit {
   novedad:Novedad;
   usuario:Usuario;
 
+  passNueva:string="";
+
   novedades:Array<Novedad>;
   constructor(
     private _route: ActivatedRoute,
@@ -38,7 +42,9 @@ export class PerfilComponent implements OnInit {
     private _servServicio:ServicioService,
     private _servPago:PagoService,
     private novedadService:NovedadService,
-    public _servLogin: LoginService) { 
+    public _servLogin: LoginService,
+    private _servUsuario: UsuarioService,
+    private _toast:ToastrService) { 
     
       
     this.listaServicios = new Array<Servicio>();
@@ -49,6 +55,7 @@ export class PerfilComponent implements OnInit {
     this.pago= new Pago();
 
     this.novedades = new Array<Novedad>();
+    this.usuario = new Usuario();
     
     this.obtenerPagos();
     this.obtenerNovedades();
@@ -103,6 +110,21 @@ export class PerfilComponent implements OnInit {
     )
   }
 
+  public modificarPass(){
+    console.log(this.passNueva);
+    this._servLogin.usuarioLogeado.password = this.passNueva;
+    this._servUsuario.modificarUsuario(this._servLogin.usuarioLogeado).subscribe(
+      (result) => {
+        console.log(result);
+        this._toast.success("Contraseña modificada","Exito");
+        this.passNueva = "";
+      },
+      (error) => {
+        console.log(error);
+        this._toast.error("Ha ocurrido un error al intentar modificar la contraseña","Error")
+      }
+    )
+  }
 
 
 

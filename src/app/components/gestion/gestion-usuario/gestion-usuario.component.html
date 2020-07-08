@@ -1,4 +1,4 @@
-<div > <!-- *ngIf="_servLogin.usuarioLogeado.perfil == 'administrador'" -->
+<div *ngIf="_servLogin.usuarioLogeado.perfil == 'administrador'">
     <div class="container">
         <div class="row py-5">
             <div class="col-md-6 offset-md-3 my-3 p-0 my-bg-dark-2">
@@ -43,7 +43,6 @@
                             #perfilV="ngModel" [disabled]="showModificarUsuario">
                             <option value="administrativo">Administrativo</option>
                             <option value="administrador">Administrador</option>
-                            <option value="gerente">Gerente</option>
                         </select>
                         <!-- Validacion -->
                         <div *ngIf="perfilV.invalid && (perfilV.dirty || perfilV.touched)">
@@ -126,4 +125,4 @@
         </div>
     </div>
 </div>
-<!-- <div *ngIf="_servLogin.usuarioLogeado.perfil != 'administrador'"><img src="https://media.tenor.com/images/b65504dbb7eeafc34f3ae35c455cf10f/tenor.gif" height="100%" width="100%"></div> -->
+<div *ngIf="_servLogin.usuarioLogeado.perfil != 'administrador'"><img src="https://media.tenor.com/images/b65504dbb7eeafc34f3ae35c455cf10f/tenor.gif" height="100%" width="100%"></div>
