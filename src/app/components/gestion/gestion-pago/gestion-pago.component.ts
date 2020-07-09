@@ -90,10 +90,11 @@ export class GestionPagoComponent implements OnInit {
       (result)=>{
         if(result.status == 2){
           this.afiliado=result.afi;
+          this.eMail=this.afiliado.email;
+          this.asignarMesAnioPago();
           this._toastr.success("Afiliado Encontrado","Exito");
           this.mostrar=true;
-          this.asignarMesAnioPago();
-          this.eMail=this.afiliado.email;
+          
         }
         else{
           this._toastr.error("No se encontro el Afiliado","Error");
