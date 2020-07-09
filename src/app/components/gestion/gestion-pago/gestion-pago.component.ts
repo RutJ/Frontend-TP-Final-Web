@@ -192,19 +192,19 @@ export class GestionPagoComponent implements OnInit {
               [ { text: 'Email Afiliado', bold: true }, { text: 'MONTO $', bold: true }, { text: 'AÑO', bold: true }, { text: 'MES', bold: true } ],
               [ {
                 ul : [
-                  ...this.pagos.filter((value, index) => index % 1 === 0).map(s => s.afiliado.email)
+                  ...this.listaPagosFiltro.filter((value, index) => index % 1 === 0).map(s => s.afiliado.email)
                 ]
               },{
                 ul : [
-                  ...this.pagos.filter((value, index) => index % 1 === 0).map(s => s.monto)
+                  ...this.listaPagosFiltro.filter((value, index) => index % 1 === 0).map(s => s.monto)
                 ]
               }, {
                 ul : [
-                  ...this.pagos.filter((value, index) => index % 1 === 0).map(s => s.anio)
+                  ...this.listaPagosFiltro.filter((value, index) => index % 1 === 0).map(s => s.anio)
                 ]
               }, {
                 ul : [
-                  ...this.pagos.filter((value, index) => index % 1 === 0).map(s => s.mes)
+                  ...this.listaPagosFiltro.filter((value, index) => index % 1 === 0).map(s => s.mes)
                 ]
               } ],
               [ { text: 'TOTAL', bold: true }, this.monto +'$', '-', '-' ]
@@ -220,8 +220,8 @@ export class GestionPagoComponent implements OnInit {
 
   obtenertotal(){
     this.monto=0;
-    for (let i = 0; i < this.pagos.length; i++) {
-      const element = this.pagos[i];
+    for (let i = 0; i < this.listaPagosFiltro.length; i++) {
+      const element = this.listaPagosFiltro[i];
       this.monto=this.monto+element.monto
     }
   }
