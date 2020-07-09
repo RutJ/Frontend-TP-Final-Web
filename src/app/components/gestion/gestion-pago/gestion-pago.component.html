@@ -20,7 +20,7 @@
                     </div>
                     <!--Buscar-->
                     <div class="text-center">
-                        <button class="btn btn-success mx-5" (click)="obtenerAfiliadoPorEmail()"><i class="fa fa-search" aria-hidden="true"></i>Buscar</button>
+                        <button class="btn btn-success mx-5" (click)="obtenerAfiliadoPorEmail()" (click)="filtrarPagos()"><i class="fa fa-search" aria-hidden="true"></i>Buscar</button>
                     </div>
                     <div *ngIf="mostrar" class="form-group row">
                         <label for="monto"> Monto </label>
@@ -36,26 +36,12 @@
 
                     <div *ngIf="mostrar" class="form-group row">
                         <label for="mes"> Mes </label>
-                        <input type="number" name="mes" id="mes" class="form-control" [(ngModel)]="pago.mes" required
-                            #mes="ngModel">
-                        <!-- Validacion -->
-                        <div *ngIf="mes.invalid && (mes.dirty || mes.touched)">
-                            <div *ngIf="mes.errors.required">
-                                <small class="text-danger"><Strong>*Mes Obligatorio</Strong></small>
-                            </div>
-                        </div>
+                        <input  id="mes" class="form-control" value="{{pago.mes}}" disabled>
                     </div>
 
                     <div *ngIf="mostrar" class="form-group row">
                         <label for="anio"> Año </label>
-                        <input type="number" name="anio" id="anio" class="form-control" [(ngModel)]="pago.anio" required
-                            #anio="ngModel">
-                        <!-- Validacion -->
-                        <div *ngIf="anio.invalid && (anio.dirty || anio.touched)">
-                            <div *ngIf="anio.errors.required">
-                                <small class="text-danger"><Strong>*Año Obligatorio</Strong></small>
-                            </div>
-                        </div>
+                        <input id="anio" class="form-control" value="{{pago.anio}}" disabled>
                     </div>
 
                     <div class="text-center">

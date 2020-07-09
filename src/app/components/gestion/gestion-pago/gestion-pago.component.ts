@@ -25,6 +25,7 @@ export class GestionPagoComponent implements OnInit {
   monto:number=0;
   filtrarTabla:string="";
   listaPagosFiltro: Array<Pago>;
+  listaPagosAfiliado:Array<Pago>;
   
 
   constructor(private _servPago:PagoService, public _servLogin:LoginService,private _toastr:ToastrService) { 
@@ -32,6 +33,7 @@ export class GestionPagoComponent implements OnInit {
     this.pago = new Pago();
     this.pagos = new Array<Pago>();
     this.listaPagosFiltro= new Array<Pago>();
+    this.listaPagosAfiliado= new Array<Pago>();
     //this.pagos = JSON.parse(sessionStorage.getItem('pagos')) || new Array<Pago>();
     this.getPagos();
     
@@ -47,6 +49,7 @@ export class GestionPagoComponent implements OnInit {
           Object.assign(this.pago, element);
           this.pagos.push(this.pago);
           this.listaPagosFiltro.push(this.pago);
+          this.listaPagosAfiliado.push(this.pago);
           this.pago = new Pago();
         });
       },
@@ -89,10 +92,13 @@ export class GestionPagoComponent implements OnInit {
           this.afiliado=result.afi;
           this._toastr.success("Afiliado Encontrado","Exito");
           this.mostrar=true;
+          this.asignarMesAnioPago();
+          this.eMail=this.afiliado.email;
         }
         else{
           this._toastr.error("No se encontro el Afiliado","Error");
           this.eMail="";
+          this.mostrar=false;
         }
       },
       (error) => {
@@ -101,6 +107,19 @@ export class GestionPagoComponent implements OnInit {
     )
   }
 
+  public asignarMesAnioPago(){
+    if(this.listaPagosAfiliado.length==0){
+      this.pago.mes=new Date().getMonth()+1;
+      this.pago.anio=new Date().getFullYear();
+    }else if(this.listaPagosAfiliado[this.listaPagosAfiliado.length-1].mes<12){
+      this.pago.mes=this.listaPagosAfiliado[this.listaPagosAfiliado.length-1].mes+1;
+      this.pago.anio=this.listaPagosAfiliado[this.listaPagosAfiliado.length-1].anio;
+    }else if(this.listaPagosAfiliado[this.listaPagosAfiliado.length-1].mes==12){
+      this.pago.mes=1;
+      this.pago.anio=this.listaPagosAfiliado[this.listaPagosAfiliado.length-1].anio+1;
+    }
+  }
+  
   /*Eliminar Pago*/
    public eliminarPago(_id:string){
     this._servPago.deletePago(_id).subscribe(
@@ -229,6 +248,9 @@ export class GestionPagoComponent implements OnInit {
   /*filtrar tabla*/
   public filtrar(){
     this.listaPagosFiltro = this.pagos.filter(element => element.afiliado.email.toLowerCase().indexOf(this.filtrarTabla) > -1);
+  }
+  public filtrarPagos(){
+    this.listaPagosAfiliado = this.pagos.filter(element => element.afiliado.email.toLowerCase().indexOf(this.eMail) > -1);
   }
 
 
