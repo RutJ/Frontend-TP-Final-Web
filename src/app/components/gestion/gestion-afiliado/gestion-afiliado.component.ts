@@ -271,7 +271,7 @@ export class GestionAfiliadoComponent implements OnInit {
           
         },
         {
-          text: 'Cantidad total de afiliados : '+ this.listaAfiliados.length,
+          text: 'Cantidad total de afiliados : '+ this.listaAfiliadosFiltro.length,
           style: 'jobTitle',
           alignment: 'left',
           bold: true,
@@ -317,7 +317,7 @@ export class GestionAfiliadoComponent implements OnInit {
             alignment: 'center',
           },
           ],
-          ...this.listaAfiliados.map(afi => {
+          ...this.listaAfiliadosFiltro.map(afi => {
             return [afi.nombres, afi.apellido, afi.dni, afi.email,this.getProfilePicObject(afi)];
           })
         ]
